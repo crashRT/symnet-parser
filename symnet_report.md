@@ -1,22 +1,16 @@
 # SymNet 解析レポート (1 / 11)
 
----
 ## 🚦 1. 最終ステータス (Status)
----
 ```
 Memory object @ EthDst cannot :~:(:==:([Const(00:00:5e:00:53:00 (MAC))]))
 ```
 
 
----
 ## 🗺️ 2. パケットの経路 (Port Trace)
----
-**Path:** `host1 -> host1 -> host1 -> host1 -> host1 -> host1 -> ap -> ap -> ap`
+**Path:** `host1-host-in -> host1-host-out -> host1-etherencap-0-in -> host1-etherencap-0-out -> host1-nic_o-in -> host1-nic_o-out -> ap-wifi1_i-in -> ap-wifi1_i-out -> ap-vlan10-in`
 
 
----
 ## 📜 3. 実行された命令 (Instruction Trace)
----
 ```
 - CreateTag(START,+0)
 - CreateTag(L3,+0)
@@ -93,9 +87,7 @@ Memory object @ EthDst cannot :~:(:==:([Const(00:00:5e:00:53:00 (MAC))]))
 ```
 
 
----
 ## 🧠 4. 最終的なパケットのメモリ状態 (Final Memory State)
----
 ### タグ (Tags)
 `L4: 160`, `START: 0`, `L3: 0`, `END: 12160`, `L2: -112`
 
@@ -242,23 +234,17 @@ Value:       Symb(#71805)
 
 # SymNet 解析レポート (2 / 11)
 
----
 ## 🚦 1. 最終ステータス (Status)
----
 ```
 Memory object @ L2+116 cannot :~:(:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]))
 ```
 
 
----
 ## 🗺️ 2. パケットの経路 (Port Trace)
----
-**Path:** `host1 -> host1 -> host1 -> host1 -> host1 -> host1 -> ap -> ap -> ap -> ap -> ap -> ap -> ap -> ap -> poesw -> poesw -> poesw`
+**Path:** `host1-host-in -> host1-host-out -> host1-etherencap-0-in -> host1-etherencap-0-out -> host1-nic_o-in -> host1-nic_o-out -> ap-wifi1_i-in -> ap-wifi1_i-out -> ap-vlan10-in -> ap-vlan10-out-0 -> ap-vlanencap-0-in -> ap-vlanencap-0-out -> ap-wlan_o-in -> ap-wlan_o-out -> poesw-port1_i-in -> poesw-port1_i-out -> poesw-tag-in`
 
 
----
 ## 📜 3. 実行された命令 (Instruction Trace)
----
 ```
 - CreateTag(START,+0)
 - CreateTag(L3,+0)
@@ -365,9 +351,7 @@ Memory object @ L2+116 cannot :~:(:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00
 ```
 
 
----
 ## 🧠 4. 最終的なパケットのメモリ状態 (Final Memory State)
----
 ### タグ (Tags)
 `L4: 160`, `START: 0`, `L3: 0`, `END: 12160`, `L2: -144`
 
@@ -534,23 +518,17 @@ Value:       Symb(#71805)
 
 # SymNet 解析レポート (3 / 11)
 
----
 ## 🚦 1. 最終ステータス (Status)
----
 ```
 Memory object @ EthDst cannot :~:(:==:([Const(00:00:5e:00:53:00 (MAC))]))
 ```
 
 
----
 ## 🗺️ 2. パケットの経路 (Port Trace)
----
-**Path:** `host1 -> host1 -> host1 -> host1 -> host1 -> host1 -> ap -> ap -> ap -> ap -> ap -> ap -> ap -> ap -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw`
+**Path:** `host1-host-in -> host1-host-out -> host1-etherencap-0-in -> host1-etherencap-0-out -> host1-nic_o-in -> host1-nic_o-out -> ap-wifi1_i-in -> ap-wifi1_i-out -> ap-vlan10-in -> ap-vlan10-out-0 -> ap-vlanencap-0-in -> ap-vlanencap-0-out -> ap-wlan_o-in -> ap-wlan_o-out -> poesw-port1_i-in -> poesw-port1_i-out -> poesw-tag-in -> poesw-tag-out-0 -> poesw-vlandecap-3-in -> poesw-vlandecap-3-out -> poesw-vlan10-in`
 
 
----
 ## 📜 3. 実行された命令 (Instruction Trace)
----
 ```
 - CreateTag(START,+0)
 - CreateTag(L3,+0)
@@ -680,9 +658,7 @@ Memory object @ EthDst cannot :~:(:==:([Const(00:00:5e:00:53:00 (MAC))]))
 ```
 
 
----
 ## 🧠 4. 最終的なパケットのメモリ状態 (Final Memory State)
----
 ### タグ (Tags)
 `L4: 160`, `START: 0`, `L3: 0`, `END: 12160`, `L2: -112`
 
@@ -829,23 +805,17 @@ Value:       Symb(#71805)
 
 # SymNet 解析レポート (4 / 11)
 
----
 ## 🚦 1. 最終ステータス (Status)
----
 ```
 Memory object @ L2+116 cannot :~:(:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]))
 ```
 
 
----
 ## 🗺️ 2. パケットの経路 (Port Trace)
----
-**Path:** `host1 -> host1 -> host1 -> host1 -> host1 -> host1 -> ap -> ap -> ap -> ap -> ap -> ap -> ap -> ap -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210`
+**Path:** `host1-host-in -> host1-host-out -> host1-etherencap-0-in -> host1-etherencap-0-out -> host1-nic_o-in -> host1-nic_o-out -> ap-wifi1_i-in -> ap-wifi1_i-out -> ap-vlan10-in -> ap-vlan10-out-0 -> ap-vlanencap-0-in -> ap-vlanencap-0-out -> ap-wlan_o-in -> ap-wlan_o-out -> poesw-port1_i-in -> poesw-port1_i-out -> poesw-tag-in -> poesw-tag-out-0 -> poesw-vlandecap-3-in -> poesw-vlandecap-3-out -> poesw-vlan10-in -> poesw-vlan10-out-0 -> poesw-vlanencap-2-in -> poesw-vlanencap-2-out -> poesw-port8_o-in -> poesw-port8_o-out -> rtx1210-lan1_i-in -> rtx1210-lan1_i-out -> rtx1210-Paint-0-in -> rtx1210-Paint-0-out -> rtx1210-lan1_tag-in`
 
 
----
 ## 📜 3. 実行された命令 (Instruction Trace)
----
 ```
 - CreateTag(START,+0)
 - CreateTag(L3,+0)
@@ -1008,9 +978,7 @@ Memory object @ L2+116 cannot :~:(:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00
 ```
 
 
----
 ## 🧠 4. 最終的なパケットのメモリ状態 (Final Memory State)
----
 ### タグ (Tags)
 `L4: 160`, `START: 0`, `L3: 0`, `END: 12160`, `L2: -144`
 
@@ -1177,23 +1145,17 @@ Value:       Symb(#71805)
 
 # SymNet 解析レポート (5 / 11)
 
----
 ## 🚦 1. 最終ステータス (Status)
----
 ```
 Memory object @ EthDst cannot :~:(:==:([Const(00:00:5e:00:53:00 (MAC))]))
 ```
 
 
----
 ## 🗺️ 2. パケットの経路 (Port Trace)
----
-**Path:** `host1 -> host1 -> host1 -> host1 -> host1 -> host1 -> ap -> ap -> ap -> ap -> ap -> ap -> ap -> ap -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210`
+**Path:** `host1-host-in -> host1-host-out -> host1-etherencap-0-in -> host1-etherencap-0-out -> host1-nic_o-in -> host1-nic_o-out -> ap-wifi1_i-in -> ap-wifi1_i-out -> ap-vlan10-in -> ap-vlan10-out-0 -> ap-vlanencap-0-in -> ap-vlanencap-0-out -> ap-wlan_o-in -> ap-wlan_o-out -> poesw-port1_i-in -> poesw-port1_i-out -> poesw-tag-in -> poesw-tag-out-0 -> poesw-vlandecap-3-in -> poesw-vlandecap-3-out -> poesw-vlan10-in -> poesw-vlan10-out-0 -> poesw-vlanencap-2-in -> poesw-vlanencap-2-out -> poesw-port8_o-in -> poesw-port8_o-out -> rtx1210-lan1_i-in -> rtx1210-lan1_i-out -> rtx1210-Paint-0-in -> rtx1210-Paint-0-out -> rtx1210-lan1_tag-in -> rtx1210-lan1_tag-out-0 -> rtx1210-vlandecap-6-in -> rtx1210-vlandecap-6-out -> rtx1210-vlan10-in`
 
 
----
 ## 📜 3. 実行された命令 (Instruction Trace)
----
 ```
 - CreateTag(START,+0)
 - CreateTag(L3,+0)
@@ -1379,9 +1341,7 @@ Memory object @ EthDst cannot :~:(:==:([Const(00:00:5e:00:53:00 (MAC))]))
 ```
 
 
----
 ## 🧠 4. 最終的なパケットのメモリ状態 (Final Memory State)
----
 ### タグ (Tags)
 `L4: 160`, `START: 0`, `L3: 0`, `END: 12160`, `L2: -112`
 
@@ -1528,23 +1488,17 @@ Value:       Symb(#71805)
 
 # SymNet 解析レポート (6 / 11)
 
----
 ## 🚦 1. 最終ステータス (Status)
----
 ```
 Memory object @ IPDst cannot :&:(:>=:([Const(192.168.127.1 (IP))]),:<=:([Const(192.168.127.1 (IP))]))
 ```
 
 
----
 ## 🗺️ 2. パケットの経路 (Port Trace)
----
-**Path:** `host1 -> host1 -> host1 -> host1 -> host1 -> host1 -> ap -> ap -> ap -> ap -> ap -> ap -> ap -> ap -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210`
+**Path:** `host1-host-in -> host1-host-out -> host1-etherencap-0-in -> host1-etherencap-0-out -> host1-nic_o-in -> host1-nic_o-out -> ap-wifi1_i-in -> ap-wifi1_i-out -> ap-vlan10-in -> ap-vlan10-out-0 -> ap-vlanencap-0-in -> ap-vlanencap-0-out -> ap-wlan_o-in -> ap-wlan_o-out -> poesw-port1_i-in -> poesw-port1_i-out -> poesw-tag-in -> poesw-tag-out-0 -> poesw-vlandecap-3-in -> poesw-vlandecap-3-out -> poesw-vlan10-in -> poesw-vlan10-out-0 -> poesw-vlanencap-2-in -> poesw-vlanencap-2-out -> poesw-port8_o-in -> poesw-port8_o-out -> rtx1210-lan1_i-in -> rtx1210-lan1_i-out -> rtx1210-Paint-0-in -> rtx1210-Paint-0-out -> rtx1210-lan1_tag-in -> rtx1210-lan1_tag-out-0 -> rtx1210-vlandecap-6-in -> rtx1210-vlandecap-6-out -> rtx1210-vlan10-in -> rtx1210-vlan10-out-0 -> rtx1210-routing-in`
 
 
----
 ## 📜 3. 実行された命令 (Instruction Trace)
----
 ```
 - CreateTag(START,+0)
 - CreateTag(L3,+0)
@@ -1733,9 +1687,7 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.127.1 (IP))]),:<=:([Const(1
 ```
 
 
----
 ## 🧠 4. 最終的なパケットのメモリ状態 (Final Memory State)
----
 ### タグ (Tags)
 `L4: 160`, `START: 0`, `L3: 0`, `END: 12160`, `L2: -112`
 
@@ -1883,23 +1835,17 @@ Value:       Symb(#71805)
 
 # SymNet 解析レポート (7 / 11)
 
----
 ## 🚦 1. 最終ステータス (Status)
----
 ```
 Memory object @ IPDst cannot :&:(:>=:([Const(192.168.127.0 (IP))]),:<=:([Const(192.168.127.255 (IP))]))
 ```
 
 
----
 ## 🗺️ 2. パケットの経路 (Port Trace)
----
-**Path:** `host1 -> host1 -> host1 -> host1 -> host1 -> host1 -> ap -> ap -> ap -> ap -> ap -> ap -> ap -> ap -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210`
+**Path:** `host1-host-in -> host1-host-out -> host1-etherencap-0-in -> host1-etherencap-0-out -> host1-nic_o-in -> host1-nic_o-out -> ap-wifi1_i-in -> ap-wifi1_i-out -> ap-vlan10-in -> ap-vlan10-out-0 -> ap-vlanencap-0-in -> ap-vlanencap-0-out -> ap-wlan_o-in -> ap-wlan_o-out -> poesw-port1_i-in -> poesw-port1_i-out -> poesw-tag-in -> poesw-tag-out-0 -> poesw-vlandecap-3-in -> poesw-vlandecap-3-out -> poesw-vlan10-in -> poesw-vlan10-out-0 -> poesw-vlanencap-2-in -> poesw-vlanencap-2-out -> poesw-port8_o-in -> poesw-port8_o-out -> rtx1210-lan1_i-in -> rtx1210-lan1_i-out -> rtx1210-Paint-0-in -> rtx1210-Paint-0-out -> rtx1210-lan1_tag-in -> rtx1210-lan1_tag-out-0 -> rtx1210-vlandecap-6-in -> rtx1210-vlandecap-6-out -> rtx1210-vlan10-in -> rtx1210-vlan10-out-0 -> rtx1210-routing-in`
 
 
----
 ## 📜 3. 実行された命令 (Instruction Trace)
----
 ```
 - CreateTag(START,+0)
 - CreateTag(L3,+0)
@@ -2089,9 +2035,7 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.127.0 (IP))]),:<=:([Const(1
 ```
 
 
----
 ## 🧠 4. 最終的なパケットのメモリ状態 (Final Memory State)
----
 ### タグ (Tags)
 `L4: 160`, `START: 0`, `L3: 0`, `END: 12160`, `L2: -112`
 
@@ -2239,23 +2183,17 @@ Value:       Symb(#71805)
 
 # SymNet 解析レポート (8 / 11)
 
----
 ## 🚦 1. 最終ステータス (Status)
----
 ```
 Memory object @ IPDst cannot :&:(:>=:([Const(192.168.180.1 (IP))]),:<=:([Const(192.168.180.1 (IP))]))
 ```
 
 
----
 ## 🗺️ 2. パケットの経路 (Port Trace)
----
-**Path:** `host1 -> host1 -> host1 -> host1 -> host1 -> host1 -> ap -> ap -> ap -> ap -> ap -> ap -> ap -> ap -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210`
+**Path:** `host1-host-in -> host1-host-out -> host1-etherencap-0-in -> host1-etherencap-0-out -> host1-nic_o-in -> host1-nic_o-out -> ap-wifi1_i-in -> ap-wifi1_i-out -> ap-vlan10-in -> ap-vlan10-out-0 -> ap-vlanencap-0-in -> ap-vlanencap-0-out -> ap-wlan_o-in -> ap-wlan_o-out -> poesw-port1_i-in -> poesw-port1_i-out -> poesw-tag-in -> poesw-tag-out-0 -> poesw-vlandecap-3-in -> poesw-vlandecap-3-out -> poesw-vlan10-in -> poesw-vlan10-out-0 -> poesw-vlanencap-2-in -> poesw-vlanencap-2-out -> poesw-port8_o-in -> poesw-port8_o-out -> rtx1210-lan1_i-in -> rtx1210-lan1_i-out -> rtx1210-Paint-0-in -> rtx1210-Paint-0-out -> rtx1210-lan1_tag-in -> rtx1210-lan1_tag-out-0 -> rtx1210-vlandecap-6-in -> rtx1210-vlandecap-6-out -> rtx1210-vlan10-in -> rtx1210-vlan10-out-0 -> rtx1210-routing-in`
 
 
----
 ## 📜 3. 実行された命令 (Instruction Trace)
----
 ```
 - CreateTag(START,+0)
 - CreateTag(L3,+0)
@@ -2446,9 +2384,7 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.180.1 (IP))]),:<=:([Const(1
 ```
 
 
----
 ## 🧠 4. 最終的なパケットのメモリ状態 (Final Memory State)
----
 ### タグ (Tags)
 `L4: 160`, `START: 0`, `L3: 0`, `END: 12160`, `L2: -112`
 
@@ -2596,23 +2532,17 @@ Value:       Symb(#71805)
 
 # SymNet 解析レポート (9 / 11)
 
----
 ## 🚦 1. 最終ステータス (Status)
----
 ```
 Memory object @ IPDst cannot :&:(:>=:([Const(192.168.180.0 (IP))]),:<=:([Const(192.168.183.255 (IP))]))
 ```
 
 
----
 ## 🗺️ 2. パケットの経路 (Port Trace)
----
-**Path:** `host1 -> host1 -> host1 -> host1 -> host1 -> host1 -> ap -> ap -> ap -> ap -> ap -> ap -> ap -> ap -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210`
+**Path:** `host1-host-in -> host1-host-out -> host1-etherencap-0-in -> host1-etherencap-0-out -> host1-nic_o-in -> host1-nic_o-out -> ap-wifi1_i-in -> ap-wifi1_i-out -> ap-vlan10-in -> ap-vlan10-out-0 -> ap-vlanencap-0-in -> ap-vlanencap-0-out -> ap-wlan_o-in -> ap-wlan_o-out -> poesw-port1_i-in -> poesw-port1_i-out -> poesw-tag-in -> poesw-tag-out-0 -> poesw-vlandecap-3-in -> poesw-vlandecap-3-out -> poesw-vlan10-in -> poesw-vlan10-out-0 -> poesw-vlanencap-2-in -> poesw-vlanencap-2-out -> poesw-port8_o-in -> poesw-port8_o-out -> rtx1210-lan1_i-in -> rtx1210-lan1_i-out -> rtx1210-Paint-0-in -> rtx1210-Paint-0-out -> rtx1210-lan1_tag-in -> rtx1210-lan1_tag-out-0 -> rtx1210-vlandecap-6-in -> rtx1210-vlandecap-6-out -> rtx1210-vlan10-in -> rtx1210-vlan10-out-0 -> rtx1210-routing-in`
 
 
----
 ## 📜 3. 実行された命令 (Instruction Trace)
----
 ```
 - CreateTag(START,+0)
 - CreateTag(L3,+0)
@@ -2804,9 +2734,7 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.180.0 (IP))]),:<=:([Const(1
 ```
 
 
----
 ## 🧠 4. 最終的なパケットのメモリ状態 (Final Memory State)
----
 ### タグ (Tags)
 `L4: 160`, `START: 0`, `L3: 0`, `END: 12160`, `L2: -112`
 
@@ -2954,23 +2882,17 @@ Value:       Symb(#71805)
 
 # SymNet 解析レポート (10 / 11)
 
----
 ## 🚦 1. 最終ステータス (Status)
----
 ```
 Memory object @ IPDst cannot :&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(255.255.255.255 (IP))]))
 ```
 
 
----
 ## 🗺️ 2. パケットの経路 (Port Trace)
----
-**Path:** `host1 -> host1 -> host1 -> host1 -> host1 -> host1 -> ap -> ap -> ap -> ap -> ap -> ap -> ap -> ap -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210`
+**Path:** `host1-host-in -> host1-host-out -> host1-etherencap-0-in -> host1-etherencap-0-out -> host1-nic_o-in -> host1-nic_o-out -> ap-wifi1_i-in -> ap-wifi1_i-out -> ap-vlan10-in -> ap-vlan10-out-0 -> ap-vlanencap-0-in -> ap-vlanencap-0-out -> ap-wlan_o-in -> ap-wlan_o-out -> poesw-port1_i-in -> poesw-port1_i-out -> poesw-tag-in -> poesw-tag-out-0 -> poesw-vlandecap-3-in -> poesw-vlandecap-3-out -> poesw-vlan10-in -> poesw-vlan10-out-0 -> poesw-vlanencap-2-in -> poesw-vlanencap-2-out -> poesw-port8_o-in -> poesw-port8_o-out -> rtx1210-lan1_i-in -> rtx1210-lan1_i-out -> rtx1210-Paint-0-in -> rtx1210-Paint-0-out -> rtx1210-lan1_tag-in -> rtx1210-lan1_tag-out-0 -> rtx1210-vlandecap-6-in -> rtx1210-vlandecap-6-out -> rtx1210-vlan10-in -> rtx1210-vlan10-out-0 -> rtx1210-routing-in`
 
 
----
 ## 📜 3. 実行された命令 (Instruction Trace)
----
 ```
 - CreateTag(START,+0)
 - CreateTag(L3,+0)
@@ -3163,9 +3085,7 @@ Memory object @ IPDst cannot :&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(255.255
 ```
 
 
----
 ## 🧠 4. 最終的なパケットのメモリ状態 (Final Memory State)
----
 ### タグ (Tags)
 `L4: 160`, `START: 0`, `L3: 0`, `END: 12160`, `L2: -112`
 
@@ -3313,23 +3233,17 @@ Value:       Symb(#71805)
 
 # SymNet 解析レポート (11 / 11)
 
----
 ## 🚦 1. 最終ステータス (Status)
----
 ```
 No route
 ```
 
 
----
 ## 🗺️ 2. パケットの経路 (Port Trace)
----
-**Path:** `host1 -> host1 -> host1 -> host1 -> host1 -> host1 -> ap -> ap -> ap -> ap -> ap -> ap -> ap -> ap -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> poesw -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210 -> rtx1210`
+**Path:** `host1-host-in -> host1-host-out -> host1-etherencap-0-in -> host1-etherencap-0-out -> host1-nic_o-in -> host1-nic_o-out -> ap-wifi1_i-in -> ap-wifi1_i-out -> ap-vlan10-in -> ap-vlan10-out-0 -> ap-vlanencap-0-in -> ap-vlanencap-0-out -> ap-wlan_o-in -> ap-wlan_o-out -> poesw-port1_i-in -> poesw-port1_i-out -> poesw-tag-in -> poesw-tag-out-0 -> poesw-vlandecap-3-in -> poesw-vlandecap-3-out -> poesw-vlan10-in -> poesw-vlan10-out-0 -> poesw-vlanencap-2-in -> poesw-vlanencap-2-out -> poesw-port8_o-in -> poesw-port8_o-out -> rtx1210-lan1_i-in -> rtx1210-lan1_i-out -> rtx1210-Paint-0-in -> rtx1210-Paint-0-out -> rtx1210-lan1_tag-in -> rtx1210-lan1_tag-out-0 -> rtx1210-vlandecap-6-in -> rtx1210-vlandecap-6-out -> rtx1210-vlan10-in -> rtx1210-vlan10-out-0 -> rtx1210-routing-in`
 
 
----
 ## 📜 3. 実行された命令 (Instruction Trace)
----
 ```
 - CreateTag(START,+0)
 - CreateTag(L3,+0)
@@ -3523,9 +3437,7 @@ No route
 ```
 
 
----
 ## 🧠 4. 最終的なパケットのメモリ状態 (Final Memory State)
----
 ### タグ (Tags)
 `L4: 160`, `START: 0`, `L3: 0`, `END: 12160`, `L2: -112`
 

@@ -22,12 +22,10 @@ def format_constant(val_str: str, context_field_name: str | None = None) -> str:
     except ValueError:
         return val_str
 
-    # 1. 既知のEtherTypeを優先的にチェック
     if val == 2048: return "IPv4 (0x0800)"
     if val == 2054: return "ARP (0x0806)"
     if val == 34525: return "VLAN (0x8100)"
 
-    # 2. コンテキストに基づいて変換を試みる
     if context_field_name:
         if context_field_name.startswith("IP"):
             if (ip_val := int_to_ip(val)):
@@ -43,7 +41,6 @@ def format_constant(val_str: str, context_field_name: str | None = None) -> str:
                 if val == 53: return "53 (Port: DNS)"
                 return f"{val} (Port)"
 
-    # 3. フォールバック
     possible_formats = []
     ip_val = int_to_ip(val)
     mac_val = int_to_mac(val)
@@ -70,7 +67,7 @@ def format_constant(val_str: str, context_field_name: str | None = None) -> str:
     return " / ".join(possible_formats)
 
 
-# --- 2. メインのパーサクラス (変更なし) ---
+# --- 2. メインのパーサクラス (to_markdown を修正) ---
 
 class SymNetParser:
     
@@ -80,6 +77,7 @@ class SymNetParser:
         'L4': { 0: 'SrcPort', 16: 'DstPort', 32: 'SeqNo', 64: 'AckNo', 96: 'DataOffset', 107: 'Flag_NS', 108: 'Flag_CWR', 109: 'Flag_ECE', 110: 'Flag_URG', 111: 'Flag_ACK', 112: 'Flag_PSH', 113: 'Flag_RST', 114: 'Flag_SYN', 115: 'Flag_FIN' }
     }
     
+    # ( __init__ は変更なし)
     def __init__(self, json_data: Dict[str, Any]):
         self.data = json_data
         self.tags = {}
@@ -96,6 +94,7 @@ class SymNetParser:
                     self.string_field_map[f"{tag_name}+{rel_offset}"] = field_name
                     self.abs_field_map[base_offset + rel_offset] = field_name
 
+    # ( _translate_string は変更なし)
     def _translate_string(self, s: str, context_field_name: str | None = None) -> str:
         if not isinstance(s, str):
             return str(s)
@@ -120,33 +119,29 @@ class SymNetParser:
         return s
 
     def to_markdown(self) -> str:
+        """解析結果を人間可読なMarkdown文字列として生成する"""
         md_lines = []
         md_lines.append("# SymNet 解析レポート\n") # この見出しは後で置換されます
 
         # --- 1. Status ---
-        md_lines.append("---")
         md_lines.append("## 🚦 1. 最終ステータス (Status)")
-        md_lines.append("---")
         md_lines.append("```")
         md_lines.append(self._translate_string(self.data['status']))
         md_lines.append("```")
         md_lines.append("\n")
 
-        # --- 2. Port Trace ---
-        md_lines.append("---")
+        # --- 2. Port Trace (修正箇所) ---
         md_lines.append("## 🗺️ 2. パケットの経路 (Port Trace)")
-        md_lines.append("---")
-        path = " -> ".join([
-            port.split('-')[0] for port in 
-            [p.popitem()[1] for p in self.data['port_trace']]
-        ])
-        md_lines.append(f"**Path:** `{path}`")
+        
+        # 修正点: .split('-')[0] を削除し、完全なポート名を表示する
+        path_ports = [p.popitem()[1] for p in self.data['port_trace']]
+        path = " -> ".join(f"`{port}`" for port in path_ports)
+        
+        md_lines.append(f"**Path:** {path}")
         md_lines.append("\n")
 
         # --- 3. Instruction Trace ---
-        md_lines.append("---")
         md_lines.append("## 📜 3. 実行された命令 (Instruction Trace)")
-        md_lines.append("---")
         md_lines.append("```")
         for item in self.data['instruction_trace']:
             _, instruction = item.popitem()
@@ -155,9 +150,7 @@ class SymNetParser:
         md_lines.append("\n")
 
         # --- 4. Memory State ---
-        md_lines.append("---")
         md_lines.append("## 🧠 4. 最終的なパケットのメモリ状態 (Final Memory State)")
-        md_lines.append("---")
         
         md_lines.append("### タグ (Tags)")
         tags_str = ", ".join([f"`{name}: {offset}`" for name, offset in self.tags.items()])
@@ -187,29 +180,24 @@ class SymNetParser:
 
         return "\n".join(md_lines)
 
-# --- 3. 実行 (修正あり) ---
+# --- 3. 実行 (変更なし) ---
 if __name__ == "__main__":
     input_json_file = 'symnet_output.json'
     output_markdown_file = 'symnet_report.md'
     
-    all_markdown_reports = [] # すべてのレポート文字列をここに格納
+    all_markdown_reports = [] 
 
     try:
-        # 1. JSONファイルを読み込む
         with open(input_json_file, 'r') as f:
-            data_list = json.load(f) # リストとして読み込む
+            data_list = json.load(f) 
             
-        # 2. 入力がリストであることを確認
         if not isinstance(data_list, list):
-            # もしリストでなく単一のオブジェクトだった場合、
-            # 互換性のためリストでラップする
             if isinstance(data_list, dict):
                 data_list = [data_list]
             else:
                 print(f"エラー: 入力JSONはオブジェクトまたはオブジェクトのリストである必要があります。")
-                exit() # スクリプトを終了
+                exit() 
 
-        # 3. 各JSONオブジェクトをループ処理
         if not data_list:
             print("警告: 入力JSONリストが空です。")
             exit()
@@ -219,15 +207,11 @@ if __name__ == "__main__":
                 print(f"警告: リストの {i} 番目のアイテムがJSONオブジェクトではありません。スキップします。")
                 continue
                 
-            # パーサーを実行
             parser = SymNetParser(data_item)
             markdown_output = parser.to_markdown()
             
-            # 各レポートに見出しを付ける (例: "レポート 1 / 3")
             report_title = f"# SymNet 解析レポート ({i + 1} / {len(data_list)})"
             
-            # to_markdown()が生成したデフォルトの見出しを、上記
-            # の番号付き見出しに置き換える
             markdown_output = markdown_output.replace(
                 "# SymNet 解析レポート", 
                 report_title
@@ -239,9 +223,7 @@ if __name__ == "__main__":
             print("エラー: 有効なレポートが生成されませんでした。")
             exit()
 
-        # 4. すべてのレポートを1つのMarkdownファイルに書き出す
         with open(output_markdown_file, 'w', encoding='utf-8') as f:
-            # 各レポートの間に水平線を追加して結合
             f.write("\n\n---\n<br/>\n---\n\n".join(all_markdown_reports))
             
         print(f"✅ {len(all_markdown_reports)} 件のレポート生成が完了しました: {output_markdown_file}")
