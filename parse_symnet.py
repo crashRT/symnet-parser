@@ -6,23 +6,17 @@ from typing import Dict, Any
 # --- 1. 定数変換ヘルパー関数 (変更なし) ---
 
 def int_to_mac(val: int) -> str | None:
-    """48ビット整数をMACアドレス文字列に変換"""
     if not (0 <= val <= 281474976710655):
         return None
     hex_str = f'{val:012x}'
     return ':'.join(hex_str[i:i+2] for i in (0, 2, 4, 6, 8, 10))
 
 def int_to_ip(val: int) -> str | None:
-    """32ビット整数をIPv4アドレス文字列に変換"""
     if not (0 <= val <= 4294967295):
         return None
     return str(ipaddress.IPv4Address(val))
 
 def format_constant(val_str: str, context_field_name: str | None = None) -> str:
-    """
-    SymNetの[Const(..)]を人間可読な形式に変換。
-    context_field_name (例: 'IPSrc', 'DstPort') に基づいて最適な表示を試みる。
-    """
     try:
         val = int(val_str)
     except ValueError:
@@ -76,18 +70,16 @@ def format_constant(val_str: str, context_field_name: str | None = None) -> str:
     return " / ".join(possible_formats)
 
 
-# --- 2. メインのパーサクラス (修正あり) ---
+# --- 2. メインのパーサクラス (変更なし) ---
 
 class SymNetParser:
     
-    # (KNOWN_OFFSETS は変更なし)
     KNOWN_OFFSETS = {
         'L2': { 0: 'EthDst', 48: 'EthSrc', 96: 'EtherType' },
         'L3': { 0: 'IPVer_IHL', 4: 'DSCP_ECN', 16: 'TotalLength', 32: 'Identification', 64: 'TTL', 72: 'IPProto', 80: 'IPChecksum', 96: 'IPSrc', 128: 'IPDst' },
         'L4': { 0: 'SrcPort', 16: 'DstPort', 32: 'SeqNo', 64: 'AckNo', 96: 'DataOffset', 107: 'Flag_NS', 108: 'Flag_CWR', 109: 'Flag_ECE', 110: 'Flag_URG', 111: 'Flag_ACK', 112: 'Flag_PSH', 113: 'Flag_RST', 114: 'Flag_SYN', 115: 'Flag_FIN' }
     }
     
-    # ( __init__ , _translate_string は変更なし)
     def __init__(self, json_data: Dict[str, Any]):
         self.data = json_data
         self.tags = {}
@@ -128,9 +120,8 @@ class SymNetParser:
         return s
 
     def to_markdown(self) -> str:
-        """解析結果を人間可読なMarkdown文字列として生成する"""
         md_lines = []
-        md_lines.append("# SymNet 解析レポート\n")
+        md_lines.append("# SymNet 解析レポート\n") # この見出しは後で置換されます
 
         # --- 1. Status ---
         md_lines.append("---")
@@ -201,20 +192,59 @@ if __name__ == "__main__":
     input_json_file = 'symnet_output.json'
     output_markdown_file = 'symnet_report.md'
     
+    all_markdown_reports = [] # すべてのレポート文字列をここに格納
+
     try:
         # 1. JSONファイルを読み込む
         with open(input_json_file, 'r') as f:
-            data = json.load(f)
+            data_list = json.load(f) # リストとして読み込む
             
-        # 2. パーサーを実行
-        parser = SymNetParser(data)
-        markdown_output = parser.to_markdown()
-        
-        # 3. Markdownファイルに書き出す
+        # 2. 入力がリストであることを確認
+        if not isinstance(data_list, list):
+            # もしリストでなく単一のオブジェクトだった場合、
+            # 互換性のためリストでラップする
+            if isinstance(data_list, dict):
+                data_list = [data_list]
+            else:
+                print(f"エラー: 入力JSONはオブジェクトまたはオブジェクトのリストである必要があります。")
+                exit() # スクリプトを終了
+
+        # 3. 各JSONオブジェクトをループ処理
+        if not data_list:
+            print("警告: 入力JSONリストが空です。")
+            exit()
+
+        for i, data_item in enumerate(data_list):
+            if not isinstance(data_item, dict):
+                print(f"警告: リストの {i} 番目のアイテムがJSONオブジェクトではありません。スキップします。")
+                continue
+                
+            # パーサーを実行
+            parser = SymNetParser(data_item)
+            markdown_output = parser.to_markdown()
+            
+            # 各レポートに見出しを付ける (例: "レポート 1 / 3")
+            report_title = f"# SymNet 解析レポート ({i + 1} / {len(data_list)})"
+            
+            # to_markdown()が生成したデフォルトの見出しを、上記
+            # の番号付き見出しに置き換える
+            markdown_output = markdown_output.replace(
+                "# SymNet 解析レポート", 
+                report_title
+            )
+            
+            all_markdown_reports.append(markdown_output)
+
+        if not all_markdown_reports:
+            print("エラー: 有効なレポートが生成されませんでした。")
+            exit()
+
+        # 4. すべてのレポートを1つのMarkdownファイルに書き出す
         with open(output_markdown_file, 'w', encoding='utf-8') as f:
-            f.write(markdown_output)
+            # 各レポートの間に水平線を追加して結合
+            f.write("\n\n---\n<br/>\n---\n\n".join(all_markdown_reports))
             
-        print(f"✅ レポートの生成が完了しました: {output_markdown_file}")
+        print(f"✅ {len(all_markdown_reports)} 件のレポート生成が完了しました: {output_markdown_file}")
         
     except FileNotFoundError:
         print(f"エラー: '{input_json_file}' が見つかりません。")
