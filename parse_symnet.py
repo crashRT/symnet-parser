@@ -93,6 +93,14 @@ class SymNetParser:
                 for rel_offset, field_name in self.KNOWN_OFFSETS[tag_name].items():
                     self.string_field_map[f"{tag_name}+{rel_offset}"] = field_name
                     self.abs_field_map[base_offset + rel_offset] = field_name
+    
+    def _parse_port_name(self, port_name: str) -> tuple[str, str]:
+        """ポート名からノード名とモジュール名を抽出する"""
+        parts = port_name.rsplit('-', 1)
+        if len(parts) == 2:
+            node_module = parts[0]
+            return node_module.split('-', 1) if '-' in node_module else (node_module, '')
+        return (port_name, '')
 
     # ( _translate_string は変更なし)
     def _translate_string(self, s: str, context_field_name: str | None = None) -> str:
@@ -130,23 +138,56 @@ class SymNetParser:
         md_lines.append("```")
         md_lines.append("\n")
 
-        # --- 2. Port Trace (修正箇所) ---
+        # --- 2. Port Trace ---
         md_lines.append("## 🗺️ 2. パケットの経路 (Port Trace)")
         
-        # 修正点: .split('-')[0] を削除し、完全なポート名を表示する
-        path_ports = [p.popitem()[1] for p in self.data['port_trace']]
-        path = " -> ".join(f"`{port}`" for port in path_ports)
+        # ポート情報を一度だけ読み取る
+        port_map = {}
+        path_ports = []
+        for item in self.data['port_trace']:
+            idx_str, port_name = list(item.items())[0]
+            port_map[int(idx_str)] = port_name
+            path_ports.append(port_name)
         
+        path = " -> ".join(f"`{port}`" for port in path_ports)
         md_lines.append(f"**Path:** {path}")
         md_lines.append("\n")
 
         # --- 3. Instruction Trace ---
         md_lines.append("## 📜 3. 実行された命令 (Instruction Trace)")
-        md_lines.append("```")
+        
+        # 命令とポートを対応付ける
+        current_node = None
+        current_module = None
+        port_idx = 0
+        
+        # 最初のポートから開始
+        if 0 in port_map:
+            current_node, current_module = self._parse_port_name(port_map[0])
+        
         for item in self.data['instruction_trace']:
-            _, instruction = item.popitem()
-            md_lines.append(f"- {self._translate_string(instruction)}")
-        md_lines.append("```")
+            idx_str, instruction = list(item.items())[0]
+            
+            # Forward命令でポートが変わる
+            if instruction.startswith('Forward('):
+                port_idx += 1
+                if port_idx in port_map:
+                    current_node, current_module = self._parse_port_name(port_map[port_idx])
+            
+            # NoOp命令を簡略化
+            if instruction.startswith('org.change.v2.analysis.processingmodels.instructions.NoOp'):
+                instruction = 'NoOp'
+            
+            # ノード・モジュール情報を付加
+            location = ""
+            if current_node:
+                if current_module:
+                    location = f"**[{current_node} / {current_module}]** "
+                else:
+                    location = f"**[{current_node}]** "
+            
+            md_lines.append(f"- {location}`{self._translate_string(instruction)}`")
+        
         md_lines.append("\n")
 
         # --- 4. Memory State ---
