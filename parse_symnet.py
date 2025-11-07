@@ -149,8 +149,30 @@ class SymNetParser:
             port_map[int(idx_str)] = port_name
             path_ports.append(port_name)
         
-        path = " -> ".join(f"`{port}`" for port in path_ports)
-        md_lines.append(f"**Path:** {path}")
+        # ノードが変わったら改行を入れる
+        path_lines = []
+        current_line = []
+        prev_node = None
+        
+        for port in path_ports:
+            node, _ = self._parse_port_name(port)
+            
+            if prev_node is not None and node != prev_node:
+                # ノードが変わったので、現在の行を保存して新しい行を開始
+                path_lines.append(" -> ".join(f"`{p}`" for p in current_line))
+                current_line = [port]
+            else:
+                current_line.append(port)
+            
+            prev_node = node
+        
+        # 最後の行を追加
+        if current_line:
+            path_lines.append(" -> ".join(f"`{p}`" for p in current_line))
+        
+        md_lines.append("**Path:**")
+        for line in path_lines:
+            md_lines.append(f"{line}  ")
         md_lines.append("\n")
 
         # --- 3. Instruction Trace ---
