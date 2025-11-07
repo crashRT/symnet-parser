@@ -21,10 +21,10 @@ Memory object @ EthDst cannot :~:(:==:([Const(00:00:5e:00:53:00 (MAC))]))
 - **[host1 / host]** `AssignRaw(IPProto,Symb(#29174),GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(IPSrc,32)`
 - **[host1 / host]** `AssignRaw(IPSrc,Symb(#-1675),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(IPSrc,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])),None)`
+- **[host1 / host]** `ConstrainRaw(IPSrc,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(Val: 4294967296 (0x100000000))])),None)`
 - **[host1 / host]** `AllocateRaw(IPDst,32)`
 - **[host1 / host]** `AssignRaw(IPDst,Symb(#-7282),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(IPDst,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])),None)`
+- **[host1 / host]** `ConstrainRaw(IPDst,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(Val: 4294967296 (0x100000000))])),None)`
 - **[host1 / host]** `AllocateRaw(TTL,8)`
 - **[host1 / host]** `AssignRaw(TTL,[Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)],GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(TotalLength,16)`
@@ -38,10 +38,10 @@ Memory object @ EthDst cannot :~:(:==:([Const(00:00:5e:00:53:00 (MAC))]))
 - **[host1 / host]** `CreateTag(L4,TotalLength0)`
 - **[host1 / host]** `AllocateRaw(SrcPort,16)`
 - **[host1 / host]** `AssignRaw(SrcPort,Symb(#19440),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(SrcPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])),None)`
+- **[host1 / host]** `ConstrainRaw(SrcPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(Val: 65536 (0x10000))])),None)`
 - **[host1 / host]** `AllocateRaw(DstPort,16)`
 - **[host1 / host]** `AssignRaw(DstPort,Symb(#-7197),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(DstPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])),None)`
+- **[host1 / host]** `ConstrainRaw(DstPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(Val: 65536 (0x10000))])),None)`
 - **[host1 / host]** `AllocateRaw(SeqNo,32)`
 - **[host1 / host]** `AssignRaw(SeqNo,Symb(#-9912),GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(AckNo,32)`
@@ -96,136 +96,140 @@ Memory object @ EthDst cannot :~:(:==:([Const(00:00:5e:00:53:00 (MAC))]))
 
 #### `[EthDst]` (AbsOffset: -112)
 ```
-Value:       [Const(00:00:5e:00:53:00 (MAC))]
+Value: [Const(00:00:5e:00:53:00 (MAC))]
 ```
 
 #### `[EthSrc]` (AbsOffset: -64)
 ```
-Value:       [Const(00:00:5e:00:53:11 (MAC))]
+Value: [Const(00:00:5e:00:53:11 (MAC))]
 ```
 
 #### `[EtherType]` (AbsOffset: -16)
 ```
-Value:       [Const(IPv4 (0x0800))]
+Value: [Const(IPv4 (0x0800))]
 ```
 
 #### `[IPVer_IHL]` (AbsOffset: 0)
 ```
-Value:       Symb(#-9116)
+Value: Symb(#-9116)
 ```
 
 #### `[DSCP_ECN]` (AbsOffset: 4)
 ```
-Value:       Symb(#-5033)
+Value: Symb(#-5033)
 ```
 
 #### `[TotalLength]` (AbsOffset: 16)
 ```
-Value:       Symb(#16052)
+Value: Symb(#16052)
 ```
 
 #### `[Identification]` (AbsOffset: 32)
 ```
-Value:       Symb(#73735)
+Value: Symb(#73735)
 ```
 
 #### `[TTL]` (AbsOffset: 64)
 ```
-Value:       [Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)]
+Value: [Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)]
 ```
 
 #### `[IPProto]` (AbsOffset: 72)
 ```
-Value:       Symb(#29174)
+Value: Symb(#29174)
 ```
 
 #### `[IPChecksum]` (AbsOffset: 80)
 ```
-Value:       Symb(#47508)
+Value: Symb(#47508)
 ```
 
 #### `[IPSrc]` (AbsOffset: 96)
 ```
-Value:       Symb(#-1675)
-Constraints: &(List(>=([Const(0.0.0.0 (IP))]), <=([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])))
+Value: Symb(#-1675)
+Constraints:
+  - IN [0.0.0.0 (IP) - Val: 4294967296 (0x100000000)]
 ```
 
 #### `[IPDst]` (AbsOffset: 128)
 ```
-Value:       Symb(#-7282)
-Constraints: &(List(>=([Const(0.0.0.0 (IP))]), <=([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])))
+Value: Symb(#-7282)
+Constraints:
+  - IN [0.0.0.0 (IP) - Val: 4294967296 (0x100000000)]
 ```
 
 #### `[SrcPort]` (AbsOffset: 160)
 ```
-Value:       Symb(#19440)
-Constraints: &(List(>=([Const(0 (Port))]), <=([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])))
+Value: Symb(#19440)
+Constraints:
+  - IN [0 (Port) - Val: 65536 (0x10000)]
 ```
 
 #### `[DstPort]` (AbsOffset: 176)
 ```
-Value:       Symb(#-7197)
-Constraints: &(List(>=([Const(0 (Port))]), <=([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])))
+Value: Symb(#-7197)
+Constraints:
+  - IN [0 (Port) - Val: 65536 (0x10000)]
 ```
 
 #### `[SeqNo]` (AbsOffset: 192)
 ```
-Value:       Symb(#-9912)
+Value: Symb(#-9912)
 ```
 
 #### `[AckNo]` (AbsOffset: 224)
 ```
-Value:       Symb(#-5840)
+Value: Symb(#-5840)
 ```
 
 #### `[DataOffset]` (AbsOffset: 256)
 ```
-Value:       [Const(IP: 0.0.0.160 / MAC: 00:00:00:00:00:a0 / Val: 160)]
+Value: [Const(IP: 0.0.0.160 / MAC: 00:00:00:00:00:a0 / Val: 160)]
 ```
 
 #### `[Unknown (Offset 260)]` (AbsOffset: 260)
 ```
-Value:       Symb(#42065)
+Value: Symb(#42065)
 ```
 
 #### `[Unknown (Offset 263)]` (AbsOffset: 263)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 264)]` (AbsOffset: 264)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 265)]` (AbsOffset: 265)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 266)]` (AbsOffset: 266)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_NS]` (AbsOffset: 267)
 ```
-Value:       Symb(#41395)
+Value: Symb(#41395)
 ```
 
 #### `[Flag_CWR]` (AbsOffset: 268)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_ECE]` (AbsOffset: 269)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_URG]` (AbsOffset: 270)
 ```
-Value:       Symb(#71805)
+Value: Symb(#71805)
 ```
 
 ---
@@ -256,10 +260,10 @@ Memory object @ L2+116 cannot :~:(:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00
 - **[host1 / host]** `AssignRaw(IPProto,Symb(#29174),GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(IPSrc,32)`
 - **[host1 / host]** `AssignRaw(IPSrc,Symb(#-1675),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(IPSrc,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])),None)`
+- **[host1 / host]** `ConstrainRaw(IPSrc,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(Val: 4294967296 (0x100000000))])),None)`
 - **[host1 / host]** `AllocateRaw(IPDst,32)`
 - **[host1 / host]** `AssignRaw(IPDst,Symb(#-7282),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(IPDst,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])),None)`
+- **[host1 / host]** `ConstrainRaw(IPDst,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(Val: 4294967296 (0x100000000))])),None)`
 - **[host1 / host]** `AllocateRaw(TTL,8)`
 - **[host1 / host]** `AssignRaw(TTL,[Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)],GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(TotalLength,16)`
@@ -273,10 +277,10 @@ Memory object @ L2+116 cannot :~:(:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00
 - **[host1 / host]** `CreateTag(L4,TotalLength0)`
 - **[host1 / host]** `AllocateRaw(SrcPort,16)`
 - **[host1 / host]** `AssignRaw(SrcPort,Symb(#19440),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(SrcPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])),None)`
+- **[host1 / host]** `ConstrainRaw(SrcPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(Val: 65536 (0x10000))])),None)`
 - **[host1 / host]** `AllocateRaw(DstPort,16)`
 - **[host1 / host]** `AssignRaw(DstPort,Symb(#-7197),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(DstPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])),None)`
+- **[host1 / host]** `ConstrainRaw(DstPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(Val: 65536 (0x10000))])),None)`
 - **[host1 / host]** `AllocateRaw(SeqNo,32)`
 - **[host1 / host]** `AssignRaw(SeqNo,Symb(#-9912),GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(AckNo,32)`
@@ -361,156 +365,160 @@ Memory object @ L2+116 cannot :~:(:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00
 
 #### `[EthDst]` (AbsOffset: -144)
 ```
-Value:       [Const(00:00:5e:00:53:00 (MAC))]
+Value: [Const(00:00:5e:00:53:00 (MAC))]
 ```
 
 #### `[EthSrc]` (AbsOffset: -96)
 ```
-Value:       [Const(00:00:5e:00:53:11 (MAC))]
+Value: [Const(00:00:5e:00:53:11 (MAC))]
 ```
 
 #### `[EtherType]` (AbsOffset: -48)
 ```
-Value:       [Const(00:00:00:00:81:00 (MAC))]
+Value: [Const(00:00:00:00:81:00 (MAC))]
 ```
 
 #### `[Unknown (Offset -32)]` (AbsOffset: -32)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset -29)]` (AbsOffset: -29)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset -28)]` (AbsOffset: -28)
 ```
-Value:       [Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]
+Value: [Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]
 ```
 
 #### `[Unknown (Offset -16)]` (AbsOffset: -16)
 ```
-Value:       [Const(IPv4 (0x0800))]
+Value: [Const(IPv4 (0x0800))]
 ```
 
 #### `[IPVer_IHL]` (AbsOffset: 0)
 ```
-Value:       Symb(#-9116)
+Value: Symb(#-9116)
 ```
 
 #### `[DSCP_ECN]` (AbsOffset: 4)
 ```
-Value:       Symb(#-5033)
+Value: Symb(#-5033)
 ```
 
 #### `[TotalLength]` (AbsOffset: 16)
 ```
-Value:       Symb(#16052)
+Value: Symb(#16052)
 ```
 
 #### `[Identification]` (AbsOffset: 32)
 ```
-Value:       Symb(#73735)
+Value: Symb(#73735)
 ```
 
 #### `[TTL]` (AbsOffset: 64)
 ```
-Value:       [Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)]
+Value: [Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)]
 ```
 
 #### `[IPProto]` (AbsOffset: 72)
 ```
-Value:       Symb(#29174)
+Value: Symb(#29174)
 ```
 
 #### `[IPChecksum]` (AbsOffset: 80)
 ```
-Value:       Symb(#47508)
+Value: Symb(#47508)
 ```
 
 #### `[IPSrc]` (AbsOffset: 96)
 ```
-Value:       Symb(#-1675)
-Constraints: &(List(>=([Const(0.0.0.0 (IP))]), <=([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])))
+Value: Symb(#-1675)
+Constraints:
+  - IN [0.0.0.0 (IP) - Val: 4294967296 (0x100000000)]
 ```
 
 #### `[IPDst]` (AbsOffset: 128)
 ```
-Value:       Symb(#-7282)
-Constraints: &(List(>=([Const(0.0.0.0 (IP))]), <=([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])))
+Value: Symb(#-7282)
+Constraints:
+  - IN [0.0.0.0 (IP) - Val: 4294967296 (0x100000000)]
 ```
 
 #### `[SrcPort]` (AbsOffset: 160)
 ```
-Value:       Symb(#19440)
-Constraints: &(List(>=([Const(0 (Port))]), <=([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])))
+Value: Symb(#19440)
+Constraints:
+  - IN [0 (Port) - Val: 65536 (0x10000)]
 ```
 
 #### `[DstPort]` (AbsOffset: 176)
 ```
-Value:       Symb(#-7197)
-Constraints: &(List(>=([Const(0 (Port))]), <=([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])))
+Value: Symb(#-7197)
+Constraints:
+  - IN [0 (Port) - Val: 65536 (0x10000)]
 ```
 
 #### `[SeqNo]` (AbsOffset: 192)
 ```
-Value:       Symb(#-9912)
+Value: Symb(#-9912)
 ```
 
 #### `[AckNo]` (AbsOffset: 224)
 ```
-Value:       Symb(#-5840)
+Value: Symb(#-5840)
 ```
 
 #### `[DataOffset]` (AbsOffset: 256)
 ```
-Value:       [Const(IP: 0.0.0.160 / MAC: 00:00:00:00:00:a0 / Val: 160)]
+Value: [Const(IP: 0.0.0.160 / MAC: 00:00:00:00:00:a0 / Val: 160)]
 ```
 
 #### `[Unknown (Offset 260)]` (AbsOffset: 260)
 ```
-Value:       Symb(#42065)
+Value: Symb(#42065)
 ```
 
 #### `[Unknown (Offset 263)]` (AbsOffset: 263)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 264)]` (AbsOffset: 264)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 265)]` (AbsOffset: 265)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 266)]` (AbsOffset: 266)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_NS]` (AbsOffset: 267)
 ```
-Value:       Symb(#41395)
+Value: Symb(#41395)
 ```
 
 #### `[Flag_CWR]` (AbsOffset: 268)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_ECE]` (AbsOffset: 269)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_URG]` (AbsOffset: 270)
 ```
-Value:       Symb(#71805)
+Value: Symb(#71805)
 ```
 
 ---
@@ -541,10 +549,10 @@ Memory object @ EthDst cannot :~:(:==:([Const(00:00:5e:00:53:00 (MAC))]))
 - **[host1 / host]** `AssignRaw(IPProto,Symb(#29174),GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(IPSrc,32)`
 - **[host1 / host]** `AssignRaw(IPSrc,Symb(#-1675),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(IPSrc,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])),None)`
+- **[host1 / host]** `ConstrainRaw(IPSrc,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(Val: 4294967296 (0x100000000))])),None)`
 - **[host1 / host]** `AllocateRaw(IPDst,32)`
 - **[host1 / host]** `AssignRaw(IPDst,Symb(#-7282),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(IPDst,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])),None)`
+- **[host1 / host]** `ConstrainRaw(IPDst,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(Val: 4294967296 (0x100000000))])),None)`
 - **[host1 / host]** `AllocateRaw(TTL,8)`
 - **[host1 / host]** `AssignRaw(TTL,[Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)],GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(TotalLength,16)`
@@ -558,10 +566,10 @@ Memory object @ EthDst cannot :~:(:==:([Const(00:00:5e:00:53:00 (MAC))]))
 - **[host1 / host]** `CreateTag(L4,TotalLength0)`
 - **[host1 / host]** `AllocateRaw(SrcPort,16)`
 - **[host1 / host]** `AssignRaw(SrcPort,Symb(#19440),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(SrcPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])),None)`
+- **[host1 / host]** `ConstrainRaw(SrcPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(Val: 65536 (0x10000))])),None)`
 - **[host1 / host]** `AllocateRaw(DstPort,16)`
 - **[host1 / host]** `AssignRaw(DstPort,Symb(#-7197),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(DstPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])),None)`
+- **[host1 / host]** `ConstrainRaw(DstPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(Val: 65536 (0x10000))])),None)`
 - **[host1 / host]** `AllocateRaw(SeqNo,32)`
 - **[host1 / host]** `AssignRaw(SeqNo,Symb(#-9912),GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(AckNo,32)`
@@ -669,136 +677,140 @@ Memory object @ EthDst cannot :~:(:==:([Const(00:00:5e:00:53:00 (MAC))]))
 
 #### `[EthDst]` (AbsOffset: -112)
 ```
-Value:       [Const(00:00:5e:00:53:00 (MAC))]
+Value: [Const(00:00:5e:00:53:00 (MAC))]
 ```
 
 #### `[EthSrc]` (AbsOffset: -64)
 ```
-Value:       [Const(00:00:5e:00:53:11 (MAC))]
+Value: [Const(00:00:5e:00:53:11 (MAC))]
 ```
 
 #### `[EtherType]` (AbsOffset: -16)
 ```
-Value:       [Const(IPv4 (0x0800))]
+Value: [Const(IPv4 (0x0800))]
 ```
 
 #### `[IPVer_IHL]` (AbsOffset: 0)
 ```
-Value:       Symb(#-9116)
+Value: Symb(#-9116)
 ```
 
 #### `[DSCP_ECN]` (AbsOffset: 4)
 ```
-Value:       Symb(#-5033)
+Value: Symb(#-5033)
 ```
 
 #### `[TotalLength]` (AbsOffset: 16)
 ```
-Value:       Symb(#16052)
+Value: Symb(#16052)
 ```
 
 #### `[Identification]` (AbsOffset: 32)
 ```
-Value:       Symb(#73735)
+Value: Symb(#73735)
 ```
 
 #### `[TTL]` (AbsOffset: 64)
 ```
-Value:       [Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)]
+Value: [Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)]
 ```
 
 #### `[IPProto]` (AbsOffset: 72)
 ```
-Value:       Symb(#29174)
+Value: Symb(#29174)
 ```
 
 #### `[IPChecksum]` (AbsOffset: 80)
 ```
-Value:       Symb(#47508)
+Value: Symb(#47508)
 ```
 
 #### `[IPSrc]` (AbsOffset: 96)
 ```
-Value:       Symb(#-1675)
-Constraints: &(List(>=([Const(0.0.0.0 (IP))]), <=([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])))
+Value: Symb(#-1675)
+Constraints:
+  - IN [0.0.0.0 (IP) - Val: 4294967296 (0x100000000)]
 ```
 
 #### `[IPDst]` (AbsOffset: 128)
 ```
-Value:       Symb(#-7282)
-Constraints: &(List(>=([Const(0.0.0.0 (IP))]), <=([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])))
+Value: Symb(#-7282)
+Constraints:
+  - IN [0.0.0.0 (IP) - Val: 4294967296 (0x100000000)]
 ```
 
 #### `[SrcPort]` (AbsOffset: 160)
 ```
-Value:       Symb(#19440)
-Constraints: &(List(>=([Const(0 (Port))]), <=([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])))
+Value: Symb(#19440)
+Constraints:
+  - IN [0 (Port) - Val: 65536 (0x10000)]
 ```
 
 #### `[DstPort]` (AbsOffset: 176)
 ```
-Value:       Symb(#-7197)
-Constraints: &(List(>=([Const(0 (Port))]), <=([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])))
+Value: Symb(#-7197)
+Constraints:
+  - IN [0 (Port) - Val: 65536 (0x10000)]
 ```
 
 #### `[SeqNo]` (AbsOffset: 192)
 ```
-Value:       Symb(#-9912)
+Value: Symb(#-9912)
 ```
 
 #### `[AckNo]` (AbsOffset: 224)
 ```
-Value:       Symb(#-5840)
+Value: Symb(#-5840)
 ```
 
 #### `[DataOffset]` (AbsOffset: 256)
 ```
-Value:       [Const(IP: 0.0.0.160 / MAC: 00:00:00:00:00:a0 / Val: 160)]
+Value: [Const(IP: 0.0.0.160 / MAC: 00:00:00:00:00:a0 / Val: 160)]
 ```
 
 #### `[Unknown (Offset 260)]` (AbsOffset: 260)
 ```
-Value:       Symb(#42065)
+Value: Symb(#42065)
 ```
 
 #### `[Unknown (Offset 263)]` (AbsOffset: 263)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 264)]` (AbsOffset: 264)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 265)]` (AbsOffset: 265)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 266)]` (AbsOffset: 266)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_NS]` (AbsOffset: 267)
 ```
-Value:       Symb(#41395)
+Value: Symb(#41395)
 ```
 
 #### `[Flag_CWR]` (AbsOffset: 268)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_ECE]` (AbsOffset: 269)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_URG]` (AbsOffset: 270)
 ```
-Value:       Symb(#71805)
+Value: Symb(#71805)
 ```
 
 ---
@@ -830,10 +842,10 @@ Memory object @ L2+116 cannot :~:(:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00
 - **[host1 / host]** `AssignRaw(IPProto,Symb(#29174),GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(IPSrc,32)`
 - **[host1 / host]** `AssignRaw(IPSrc,Symb(#-1675),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(IPSrc,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])),None)`
+- **[host1 / host]** `ConstrainRaw(IPSrc,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(Val: 4294967296 (0x100000000))])),None)`
 - **[host1 / host]** `AllocateRaw(IPDst,32)`
 - **[host1 / host]** `AssignRaw(IPDst,Symb(#-7282),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(IPDst,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])),None)`
+- **[host1 / host]** `ConstrainRaw(IPDst,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(Val: 4294967296 (0x100000000))])),None)`
 - **[host1 / host]** `AllocateRaw(TTL,8)`
 - **[host1 / host]** `AssignRaw(TTL,[Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)],GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(TotalLength,16)`
@@ -847,10 +859,10 @@ Memory object @ L2+116 cannot :~:(:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00
 - **[host1 / host]** `CreateTag(L4,TotalLength0)`
 - **[host1 / host]** `AllocateRaw(SrcPort,16)`
 - **[host1 / host]** `AssignRaw(SrcPort,Symb(#19440),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(SrcPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])),None)`
+- **[host1 / host]** `ConstrainRaw(SrcPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(Val: 65536 (0x10000))])),None)`
 - **[host1 / host]** `AllocateRaw(DstPort,16)`
 - **[host1 / host]** `AssignRaw(DstPort,Symb(#-7197),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(DstPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])),None)`
+- **[host1 / host]** `ConstrainRaw(DstPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(Val: 65536 (0x10000))])),None)`
 - **[host1 / host]** `AllocateRaw(SeqNo,32)`
 - **[host1 / host]** `AssignRaw(SeqNo,Symb(#-9912),GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(AckNo,32)`
@@ -991,156 +1003,160 @@ Memory object @ L2+116 cannot :~:(:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00
 
 #### `[EthDst]` (AbsOffset: -144)
 ```
-Value:       [Const(00:00:5e:00:53:00 (MAC))]
+Value: [Const(00:00:5e:00:53:00 (MAC))]
 ```
 
 #### `[EthSrc]` (AbsOffset: -96)
 ```
-Value:       [Const(00:00:5e:00:53:11 (MAC))]
+Value: [Const(00:00:5e:00:53:11 (MAC))]
 ```
 
 #### `[EtherType]` (AbsOffset: -48)
 ```
-Value:       [Const(00:00:00:00:81:00 (MAC))]
+Value: [Const(00:00:00:00:81:00 (MAC))]
 ```
 
 #### `[Unknown (Offset -32)]` (AbsOffset: -32)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset -29)]` (AbsOffset: -29)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset -28)]` (AbsOffset: -28)
 ```
-Value:       [Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]
+Value: [Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]
 ```
 
 #### `[Unknown (Offset -16)]` (AbsOffset: -16)
 ```
-Value:       [Const(IPv4 (0x0800))]
+Value: [Const(IPv4 (0x0800))]
 ```
 
 #### `[IPVer_IHL]` (AbsOffset: 0)
 ```
-Value:       Symb(#-9116)
+Value: Symb(#-9116)
 ```
 
 #### `[DSCP_ECN]` (AbsOffset: 4)
 ```
-Value:       Symb(#-5033)
+Value: Symb(#-5033)
 ```
 
 #### `[TotalLength]` (AbsOffset: 16)
 ```
-Value:       Symb(#16052)
+Value: Symb(#16052)
 ```
 
 #### `[Identification]` (AbsOffset: 32)
 ```
-Value:       Symb(#73735)
+Value: Symb(#73735)
 ```
 
 #### `[TTL]` (AbsOffset: 64)
 ```
-Value:       [Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)]
+Value: [Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)]
 ```
 
 #### `[IPProto]` (AbsOffset: 72)
 ```
-Value:       Symb(#29174)
+Value: Symb(#29174)
 ```
 
 #### `[IPChecksum]` (AbsOffset: 80)
 ```
-Value:       Symb(#47508)
+Value: Symb(#47508)
 ```
 
 #### `[IPSrc]` (AbsOffset: 96)
 ```
-Value:       Symb(#-1675)
-Constraints: &(List(>=([Const(0.0.0.0 (IP))]), <=([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])))
+Value: Symb(#-1675)
+Constraints:
+  - IN [0.0.0.0 (IP) - Val: 4294967296 (0x100000000)]
 ```
 
 #### `[IPDst]` (AbsOffset: 128)
 ```
-Value:       Symb(#-7282)
-Constraints: &(List(>=([Const(0.0.0.0 (IP))]), <=([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])))
+Value: Symb(#-7282)
+Constraints:
+  - IN [0.0.0.0 (IP) - Val: 4294967296 (0x100000000)]
 ```
 
 #### `[SrcPort]` (AbsOffset: 160)
 ```
-Value:       Symb(#19440)
-Constraints: &(List(>=([Const(0 (Port))]), <=([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])))
+Value: Symb(#19440)
+Constraints:
+  - IN [0 (Port) - Val: 65536 (0x10000)]
 ```
 
 #### `[DstPort]` (AbsOffset: 176)
 ```
-Value:       Symb(#-7197)
-Constraints: &(List(>=([Const(0 (Port))]), <=([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])))
+Value: Symb(#-7197)
+Constraints:
+  - IN [0 (Port) - Val: 65536 (0x10000)]
 ```
 
 #### `[SeqNo]` (AbsOffset: 192)
 ```
-Value:       Symb(#-9912)
+Value: Symb(#-9912)
 ```
 
 #### `[AckNo]` (AbsOffset: 224)
 ```
-Value:       Symb(#-5840)
+Value: Symb(#-5840)
 ```
 
 #### `[DataOffset]` (AbsOffset: 256)
 ```
-Value:       [Const(IP: 0.0.0.160 / MAC: 00:00:00:00:00:a0 / Val: 160)]
+Value: [Const(IP: 0.0.0.160 / MAC: 00:00:00:00:00:a0 / Val: 160)]
 ```
 
 #### `[Unknown (Offset 260)]` (AbsOffset: 260)
 ```
-Value:       Symb(#42065)
+Value: Symb(#42065)
 ```
 
 #### `[Unknown (Offset 263)]` (AbsOffset: 263)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 264)]` (AbsOffset: 264)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 265)]` (AbsOffset: 265)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 266)]` (AbsOffset: 266)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_NS]` (AbsOffset: 267)
 ```
-Value:       Symb(#41395)
+Value: Symb(#41395)
 ```
 
 #### `[Flag_CWR]` (AbsOffset: 268)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_ECE]` (AbsOffset: 269)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_URG]` (AbsOffset: 270)
 ```
-Value:       Symb(#71805)
+Value: Symb(#71805)
 ```
 
 ---
@@ -1172,10 +1188,10 @@ Memory object @ EthDst cannot :~:(:==:([Const(00:00:5e:00:53:00 (MAC))]))
 - **[host1 / host]** `AssignRaw(IPProto,Symb(#29174),GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(IPSrc,32)`
 - **[host1 / host]** `AssignRaw(IPSrc,Symb(#-1675),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(IPSrc,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])),None)`
+- **[host1 / host]** `ConstrainRaw(IPSrc,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(Val: 4294967296 (0x100000000))])),None)`
 - **[host1 / host]** `AllocateRaw(IPDst,32)`
 - **[host1 / host]** `AssignRaw(IPDst,Symb(#-7282),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(IPDst,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])),None)`
+- **[host1 / host]** `ConstrainRaw(IPDst,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(Val: 4294967296 (0x100000000))])),None)`
 - **[host1 / host]** `AllocateRaw(TTL,8)`
 - **[host1 / host]** `AssignRaw(TTL,[Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)],GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(TotalLength,16)`
@@ -1189,10 +1205,10 @@ Memory object @ EthDst cannot :~:(:==:([Const(00:00:5e:00:53:00 (MAC))]))
 - **[host1 / host]** `CreateTag(L4,TotalLength0)`
 - **[host1 / host]** `AllocateRaw(SrcPort,16)`
 - **[host1 / host]** `AssignRaw(SrcPort,Symb(#19440),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(SrcPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])),None)`
+- **[host1 / host]** `ConstrainRaw(SrcPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(Val: 65536 (0x10000))])),None)`
 - **[host1 / host]** `AllocateRaw(DstPort,16)`
 - **[host1 / host]** `AssignRaw(DstPort,Symb(#-7197),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(DstPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])),None)`
+- **[host1 / host]** `ConstrainRaw(DstPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(Val: 65536 (0x10000))])),None)`
 - **[host1 / host]** `AllocateRaw(SeqNo,32)`
 - **[host1 / host]** `AssignRaw(SeqNo,Symb(#-9912),GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(AckNo,32)`
@@ -1356,136 +1372,140 @@ Memory object @ EthDst cannot :~:(:==:([Const(00:00:5e:00:53:00 (MAC))]))
 
 #### `[EthDst]` (AbsOffset: -112)
 ```
-Value:       [Const(00:00:5e:00:53:00 (MAC))]
+Value: [Const(00:00:5e:00:53:00 (MAC))]
 ```
 
 #### `[EthSrc]` (AbsOffset: -64)
 ```
-Value:       [Const(00:00:5e:00:53:11 (MAC))]
+Value: [Const(00:00:5e:00:53:11 (MAC))]
 ```
 
 #### `[EtherType]` (AbsOffset: -16)
 ```
-Value:       [Const(IPv4 (0x0800))]
+Value: [Const(IPv4 (0x0800))]
 ```
 
 #### `[IPVer_IHL]` (AbsOffset: 0)
 ```
-Value:       Symb(#-9116)
+Value: Symb(#-9116)
 ```
 
 #### `[DSCP_ECN]` (AbsOffset: 4)
 ```
-Value:       Symb(#-5033)
+Value: Symb(#-5033)
 ```
 
 #### `[TotalLength]` (AbsOffset: 16)
 ```
-Value:       Symb(#16052)
+Value: Symb(#16052)
 ```
 
 #### `[Identification]` (AbsOffset: 32)
 ```
-Value:       Symb(#73735)
+Value: Symb(#73735)
 ```
 
 #### `[TTL]` (AbsOffset: 64)
 ```
-Value:       [Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)]
+Value: [Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)]
 ```
 
 #### `[IPProto]` (AbsOffset: 72)
 ```
-Value:       Symb(#29174)
+Value: Symb(#29174)
 ```
 
 #### `[IPChecksum]` (AbsOffset: 80)
 ```
-Value:       Symb(#47508)
+Value: Symb(#47508)
 ```
 
 #### `[IPSrc]` (AbsOffset: 96)
 ```
-Value:       Symb(#-1675)
-Constraints: &(List(>=([Const(0.0.0.0 (IP))]), <=([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])))
+Value: Symb(#-1675)
+Constraints:
+  - IN [0.0.0.0 (IP) - Val: 4294967296 (0x100000000)]
 ```
 
 #### `[IPDst]` (AbsOffset: 128)
 ```
-Value:       Symb(#-7282)
-Constraints: &(List(>=([Const(0.0.0.0 (IP))]), <=([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])))
+Value: Symb(#-7282)
+Constraints:
+  - IN [0.0.0.0 (IP) - Val: 4294967296 (0x100000000)]
 ```
 
 #### `[SrcPort]` (AbsOffset: 160)
 ```
-Value:       Symb(#19440)
-Constraints: &(List(>=([Const(0 (Port))]), <=([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])))
+Value: Symb(#19440)
+Constraints:
+  - IN [0 (Port) - Val: 65536 (0x10000)]
 ```
 
 #### `[DstPort]` (AbsOffset: 176)
 ```
-Value:       Symb(#-7197)
-Constraints: &(List(>=([Const(0 (Port))]), <=([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])))
+Value: Symb(#-7197)
+Constraints:
+  - IN [0 (Port) - Val: 65536 (0x10000)]
 ```
 
 #### `[SeqNo]` (AbsOffset: 192)
 ```
-Value:       Symb(#-9912)
+Value: Symb(#-9912)
 ```
 
 #### `[AckNo]` (AbsOffset: 224)
 ```
-Value:       Symb(#-5840)
+Value: Symb(#-5840)
 ```
 
 #### `[DataOffset]` (AbsOffset: 256)
 ```
-Value:       [Const(IP: 0.0.0.160 / MAC: 00:00:00:00:00:a0 / Val: 160)]
+Value: [Const(IP: 0.0.0.160 / MAC: 00:00:00:00:00:a0 / Val: 160)]
 ```
 
 #### `[Unknown (Offset 260)]` (AbsOffset: 260)
 ```
-Value:       Symb(#42065)
+Value: Symb(#42065)
 ```
 
 #### `[Unknown (Offset 263)]` (AbsOffset: 263)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 264)]` (AbsOffset: 264)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 265)]` (AbsOffset: 265)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 266)]` (AbsOffset: 266)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_NS]` (AbsOffset: 267)
 ```
-Value:       Symb(#41395)
+Value: Symb(#41395)
 ```
 
 #### `[Flag_CWR]` (AbsOffset: 268)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_ECE]` (AbsOffset: 269)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_URG]` (AbsOffset: 270)
 ```
-Value:       Symb(#71805)
+Value: Symb(#71805)
 ```
 
 ---
@@ -1517,10 +1537,10 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.127.1 (IP))]),:<=:([Const(1
 - **[host1 / host]** `AssignRaw(IPProto,Symb(#29174),GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(IPSrc,32)`
 - **[host1 / host]** `AssignRaw(IPSrc,Symb(#-1675),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(IPSrc,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])),None)`
+- **[host1 / host]** `ConstrainRaw(IPSrc,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(Val: 4294967296 (0x100000000))])),None)`
 - **[host1 / host]** `AllocateRaw(IPDst,32)`
 - **[host1 / host]** `AssignRaw(IPDst,Symb(#-7282),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(IPDst,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])),None)`
+- **[host1 / host]** `ConstrainRaw(IPDst,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(Val: 4294967296 (0x100000000))])),None)`
 - **[host1 / host]** `AllocateRaw(TTL,8)`
 - **[host1 / host]** `AssignRaw(TTL,[Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)],GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(TotalLength,16)`
@@ -1534,10 +1554,10 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.127.1 (IP))]),:<=:([Const(1
 - **[host1 / host]** `CreateTag(L4,TotalLength0)`
 - **[host1 / host]** `AllocateRaw(SrcPort,16)`
 - **[host1 / host]** `AssignRaw(SrcPort,Symb(#19440),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(SrcPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])),None)`
+- **[host1 / host]** `ConstrainRaw(SrcPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(Val: 65536 (0x10000))])),None)`
 - **[host1 / host]** `AllocateRaw(DstPort,16)`
 - **[host1 / host]** `AssignRaw(DstPort,Symb(#-7197),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(DstPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])),None)`
+- **[host1 / host]** `ConstrainRaw(DstPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(Val: 65536 (0x10000))])),None)`
 - **[host1 / host]** `AllocateRaw(SeqNo,32)`
 - **[host1 / host]** `AssignRaw(SeqNo,Symb(#-9912),GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(AckNo,32)`
@@ -1704,137 +1724,142 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.127.1 (IP))]),:<=:([Const(1
 
 #### `[EthDst]` (AbsOffset: -112)
 ```
-Value:       [Const(00:00:5e:00:53:00 (MAC))]
-Constraints: ==([Const(00:00:5e:00:53:00 (MAC))])
+Value: [Const(00:00:5e:00:53:00 (MAC))]
+Constraints:
+  - == 00:00:5e:00:53:00 (MAC)
 ```
 
 #### `[EthSrc]` (AbsOffset: -64)
 ```
-Value:       [Const(00:00:5e:00:53:11 (MAC))]
+Value: [Const(00:00:5e:00:53:11 (MAC))]
 ```
 
 #### `[EtherType]` (AbsOffset: -16)
 ```
-Value:       [Const(IPv4 (0x0800))]
+Value: [Const(IPv4 (0x0800))]
 ```
 
 #### `[IPVer_IHL]` (AbsOffset: 0)
 ```
-Value:       Symb(#-9116)
+Value: Symb(#-9116)
 ```
 
 #### `[DSCP_ECN]` (AbsOffset: 4)
 ```
-Value:       Symb(#-5033)
+Value: Symb(#-5033)
 ```
 
 #### `[TotalLength]` (AbsOffset: 16)
 ```
-Value:       Symb(#16052)
+Value: Symb(#16052)
 ```
 
 #### `[Identification]` (AbsOffset: 32)
 ```
-Value:       Symb(#73735)
+Value: Symb(#73735)
 ```
 
 #### `[TTL]` (AbsOffset: 64)
 ```
-Value:       [Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)]
+Value: [Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)]
 ```
 
 #### `[IPProto]` (AbsOffset: 72)
 ```
-Value:       Symb(#29174)
+Value: Symb(#29174)
 ```
 
 #### `[IPChecksum]` (AbsOffset: 80)
 ```
-Value:       Symb(#47508)
+Value: Symb(#47508)
 ```
 
 #### `[IPSrc]` (AbsOffset: 96)
 ```
-Value:       Symb(#-1675)
-Constraints: &(List(>=([Const(0.0.0.0 (IP))]), <=([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])))
+Value: Symb(#-1675)
+Constraints:
+  - IN [0.0.0.0 (IP) - Val: 4294967296 (0x100000000)]
 ```
 
 #### `[IPDst]` (AbsOffset: 128)
 ```
-Value:       Symb(#-7282)
-Constraints: &(List(>=([Const(0.0.0.0 (IP))]), <=([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])))
+Value: Symb(#-7282)
+Constraints:
+  - IN [0.0.0.0 (IP) - Val: 4294967296 (0x100000000)]
 ```
 
 #### `[SrcPort]` (AbsOffset: 160)
 ```
-Value:       Symb(#19440)
-Constraints: &(List(>=([Const(0 (Port))]), <=([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])))
+Value: Symb(#19440)
+Constraints:
+  - IN [0 (Port) - Val: 65536 (0x10000)]
 ```
 
 #### `[DstPort]` (AbsOffset: 176)
 ```
-Value:       Symb(#-7197)
-Constraints: &(List(>=([Const(0 (Port))]), <=([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])))
+Value: Symb(#-7197)
+Constraints:
+  - IN [0 (Port) - Val: 65536 (0x10000)]
 ```
 
 #### `[SeqNo]` (AbsOffset: 192)
 ```
-Value:       Symb(#-9912)
+Value: Symb(#-9912)
 ```
 
 #### `[AckNo]` (AbsOffset: 224)
 ```
-Value:       Symb(#-5840)
+Value: Symb(#-5840)
 ```
 
 #### `[DataOffset]` (AbsOffset: 256)
 ```
-Value:       [Const(IP: 0.0.0.160 / MAC: 00:00:00:00:00:a0 / Val: 160)]
+Value: [Const(IP: 0.0.0.160 / MAC: 00:00:00:00:00:a0 / Val: 160)]
 ```
 
 #### `[Unknown (Offset 260)]` (AbsOffset: 260)
 ```
-Value:       Symb(#42065)
+Value: Symb(#42065)
 ```
 
 #### `[Unknown (Offset 263)]` (AbsOffset: 263)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 264)]` (AbsOffset: 264)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 265)]` (AbsOffset: 265)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 266)]` (AbsOffset: 266)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_NS]` (AbsOffset: 267)
 ```
-Value:       Symb(#41395)
+Value: Symb(#41395)
 ```
 
 #### `[Flag_CWR]` (AbsOffset: 268)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_ECE]` (AbsOffset: 269)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_URG]` (AbsOffset: 270)
 ```
-Value:       Symb(#71805)
+Value: Symb(#71805)
 ```
 
 ---
@@ -1866,10 +1891,10 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.127.0 (IP))]),:<=:([Const(1
 - **[host1 / host]** `AssignRaw(IPProto,Symb(#29174),GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(IPSrc,32)`
 - **[host1 / host]** `AssignRaw(IPSrc,Symb(#-1675),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(IPSrc,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])),None)`
+- **[host1 / host]** `ConstrainRaw(IPSrc,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(Val: 4294967296 (0x100000000))])),None)`
 - **[host1 / host]** `AllocateRaw(IPDst,32)`
 - **[host1 / host]** `AssignRaw(IPDst,Symb(#-7282),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(IPDst,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])),None)`
+- **[host1 / host]** `ConstrainRaw(IPDst,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(Val: 4294967296 (0x100000000))])),None)`
 - **[host1 / host]** `AllocateRaw(TTL,8)`
 - **[host1 / host]** `AssignRaw(TTL,[Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)],GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(TotalLength,16)`
@@ -1883,10 +1908,10 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.127.0 (IP))]),:<=:([Const(1
 - **[host1 / host]** `CreateTag(L4,TotalLength0)`
 - **[host1 / host]** `AllocateRaw(SrcPort,16)`
 - **[host1 / host]** `AssignRaw(SrcPort,Symb(#19440),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(SrcPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])),None)`
+- **[host1 / host]** `ConstrainRaw(SrcPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(Val: 65536 (0x10000))])),None)`
 - **[host1 / host]** `AllocateRaw(DstPort,16)`
 - **[host1 / host]** `AssignRaw(DstPort,Symb(#-7197),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(DstPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])),None)`
+- **[host1 / host]** `ConstrainRaw(DstPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(Val: 65536 (0x10000))])),None)`
 - **[host1 / host]** `AllocateRaw(SeqNo,32)`
 - **[host1 / host]** `AssignRaw(SeqNo,Symb(#-9912),GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(AckNo,32)`
@@ -2054,137 +2079,143 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.127.0 (IP))]),:<=:([Const(1
 
 #### `[EthDst]` (AbsOffset: -112)
 ```
-Value:       [Const(00:00:5e:00:53:00 (MAC))]
-Constraints: ==([Const(00:00:5e:00:53:00 (MAC))])
+Value: [Const(00:00:5e:00:53:00 (MAC))]
+Constraints:
+  - == 00:00:5e:00:53:00 (MAC)
 ```
 
 #### `[EthSrc]` (AbsOffset: -64)
 ```
-Value:       [Const(00:00:5e:00:53:11 (MAC))]
+Value: [Const(00:00:5e:00:53:11 (MAC))]
 ```
 
 #### `[EtherType]` (AbsOffset: -16)
 ```
-Value:       [Const(IPv4 (0x0800))]
+Value: [Const(IPv4 (0x0800))]
 ```
 
 #### `[IPVer_IHL]` (AbsOffset: 0)
 ```
-Value:       Symb(#-9116)
+Value: Symb(#-9116)
 ```
 
 #### `[DSCP_ECN]` (AbsOffset: 4)
 ```
-Value:       Symb(#-5033)
+Value: Symb(#-5033)
 ```
 
 #### `[TotalLength]` (AbsOffset: 16)
 ```
-Value:       Symb(#16052)
+Value: Symb(#16052)
 ```
 
 #### `[Identification]` (AbsOffset: 32)
 ```
-Value:       Symb(#73735)
+Value: Symb(#73735)
 ```
 
 #### `[TTL]` (AbsOffset: 64)
 ```
-Value:       [Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)]
+Value: [Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)]
 ```
 
 #### `[IPProto]` (AbsOffset: 72)
 ```
-Value:       Symb(#29174)
+Value: Symb(#29174)
 ```
 
 #### `[IPChecksum]` (AbsOffset: 80)
 ```
-Value:       Symb(#47508)
+Value: Symb(#47508)
 ```
 
 #### `[IPSrc]` (AbsOffset: 96)
 ```
-Value:       Symb(#-1675)
-Constraints: &(List(>=([Const(0.0.0.0 (IP))]), <=([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])))
+Value: Symb(#-1675)
+Constraints:
+  - IN [0.0.0.0 (IP) - Val: 4294967296 (0x100000000)]
 ```
 
 #### `[IPDst]` (AbsOffset: 128)
 ```
-Value:       Symb(#-7282)
-Constraints: ~(&(List(>=([Const(192.168.127.1 (IP))]), <=([Const(192.168.127.1 (IP))])))), &(List(>=([Const(0.0.0.0 (IP))]), <=([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])))
+Value: Symb(#-7282)
+Constraints:
+  - NOT IN [192.168.127.1 (IP) - 192.168.127.1 (IP)]
+  - IN [0.0.0.0 (IP) - Val: 4294967296 (0x100000000)]
 ```
 
 #### `[SrcPort]` (AbsOffset: 160)
 ```
-Value:       Symb(#19440)
-Constraints: &(List(>=([Const(0 (Port))]), <=([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])))
+Value: Symb(#19440)
+Constraints:
+  - IN [0 (Port) - Val: 65536 (0x10000)]
 ```
 
 #### `[DstPort]` (AbsOffset: 176)
 ```
-Value:       Symb(#-7197)
-Constraints: &(List(>=([Const(0 (Port))]), <=([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])))
+Value: Symb(#-7197)
+Constraints:
+  - IN [0 (Port) - Val: 65536 (0x10000)]
 ```
 
 #### `[SeqNo]` (AbsOffset: 192)
 ```
-Value:       Symb(#-9912)
+Value: Symb(#-9912)
 ```
 
 #### `[AckNo]` (AbsOffset: 224)
 ```
-Value:       Symb(#-5840)
+Value: Symb(#-5840)
 ```
 
 #### `[DataOffset]` (AbsOffset: 256)
 ```
-Value:       [Const(IP: 0.0.0.160 / MAC: 00:00:00:00:00:a0 / Val: 160)]
+Value: [Const(IP: 0.0.0.160 / MAC: 00:00:00:00:00:a0 / Val: 160)]
 ```
 
 #### `[Unknown (Offset 260)]` (AbsOffset: 260)
 ```
-Value:       Symb(#42065)
+Value: Symb(#42065)
 ```
 
 #### `[Unknown (Offset 263)]` (AbsOffset: 263)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 264)]` (AbsOffset: 264)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 265)]` (AbsOffset: 265)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 266)]` (AbsOffset: 266)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_NS]` (AbsOffset: 267)
 ```
-Value:       Symb(#41395)
+Value: Symb(#41395)
 ```
 
 #### `[Flag_CWR]` (AbsOffset: 268)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_ECE]` (AbsOffset: 269)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_URG]` (AbsOffset: 270)
 ```
-Value:       Symb(#71805)
+Value: Symb(#71805)
 ```
 
 ---
@@ -2216,10 +2247,10 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.180.1 (IP))]),:<=:([Const(1
 - **[host1 / host]** `AssignRaw(IPProto,Symb(#29174),GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(IPSrc,32)`
 - **[host1 / host]** `AssignRaw(IPSrc,Symb(#-1675),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(IPSrc,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])),None)`
+- **[host1 / host]** `ConstrainRaw(IPSrc,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(Val: 4294967296 (0x100000000))])),None)`
 - **[host1 / host]** `AllocateRaw(IPDst,32)`
 - **[host1 / host]** `AssignRaw(IPDst,Symb(#-7282),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(IPDst,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])),None)`
+- **[host1 / host]** `ConstrainRaw(IPDst,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(Val: 4294967296 (0x100000000))])),None)`
 - **[host1 / host]** `AllocateRaw(TTL,8)`
 - **[host1 / host]** `AssignRaw(TTL,[Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)],GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(TotalLength,16)`
@@ -2233,10 +2264,10 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.180.1 (IP))]),:<=:([Const(1
 - **[host1 / host]** `CreateTag(L4,TotalLength0)`
 - **[host1 / host]** `AllocateRaw(SrcPort,16)`
 - **[host1 / host]** `AssignRaw(SrcPort,Symb(#19440),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(SrcPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])),None)`
+- **[host1 / host]** `ConstrainRaw(SrcPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(Val: 65536 (0x10000))])),None)`
 - **[host1 / host]** `AllocateRaw(DstPort,16)`
 - **[host1 / host]** `AssignRaw(DstPort,Symb(#-7197),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(DstPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])),None)`
+- **[host1 / host]** `ConstrainRaw(DstPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(Val: 65536 (0x10000))])),None)`
 - **[host1 / host]** `AllocateRaw(SeqNo,32)`
 - **[host1 / host]** `AssignRaw(SeqNo,Symb(#-9912),GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(AckNo,32)`
@@ -2405,137 +2436,144 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.180.1 (IP))]),:<=:([Const(1
 
 #### `[EthDst]` (AbsOffset: -112)
 ```
-Value:       [Const(00:00:5e:00:53:00 (MAC))]
-Constraints: ==([Const(00:00:5e:00:53:00 (MAC))])
+Value: [Const(00:00:5e:00:53:00 (MAC))]
+Constraints:
+  - == 00:00:5e:00:53:00 (MAC)
 ```
 
 #### `[EthSrc]` (AbsOffset: -64)
 ```
-Value:       [Const(00:00:5e:00:53:11 (MAC))]
+Value: [Const(00:00:5e:00:53:11 (MAC))]
 ```
 
 #### `[EtherType]` (AbsOffset: -16)
 ```
-Value:       [Const(IPv4 (0x0800))]
+Value: [Const(IPv4 (0x0800))]
 ```
 
 #### `[IPVer_IHL]` (AbsOffset: 0)
 ```
-Value:       Symb(#-9116)
+Value: Symb(#-9116)
 ```
 
 #### `[DSCP_ECN]` (AbsOffset: 4)
 ```
-Value:       Symb(#-5033)
+Value: Symb(#-5033)
 ```
 
 #### `[TotalLength]` (AbsOffset: 16)
 ```
-Value:       Symb(#16052)
+Value: Symb(#16052)
 ```
 
 #### `[Identification]` (AbsOffset: 32)
 ```
-Value:       Symb(#73735)
+Value: Symb(#73735)
 ```
 
 #### `[TTL]` (AbsOffset: 64)
 ```
-Value:       [Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)]
+Value: [Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)]
 ```
 
 #### `[IPProto]` (AbsOffset: 72)
 ```
-Value:       Symb(#29174)
+Value: Symb(#29174)
 ```
 
 #### `[IPChecksum]` (AbsOffset: 80)
 ```
-Value:       Symb(#47508)
+Value: Symb(#47508)
 ```
 
 #### `[IPSrc]` (AbsOffset: 96)
 ```
-Value:       Symb(#-1675)
-Constraints: &(List(>=([Const(0.0.0.0 (IP))]), <=([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])))
+Value: Symb(#-1675)
+Constraints:
+  - IN [0.0.0.0 (IP) - Val: 4294967296 (0x100000000)]
 ```
 
 #### `[IPDst]` (AbsOffset: 128)
 ```
-Value:       Symb(#-7282)
-Constraints: ~(&(List(>=([Const(192.168.127.0 (IP))]), <=([Const(192.168.127.255 (IP))])))), ~(&(List(>=([Const(192.168.127.1 (IP))]), <=([Const(192.168.127.1 (IP))])))), &(List(>=([Const(0.0.0.0 (IP))]), <=([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])))
+Value: Symb(#-7282)
+Constraints:
+  - NOT IN [192.168.127.0 (IP) - 192.168.127.255 (IP)]
+  - NOT IN [192.168.127.1 (IP) - 192.168.127.1 (IP)]
+  - IN [0.0.0.0 (IP) - Val: 4294967296 (0x100000000)]
 ```
 
 #### `[SrcPort]` (AbsOffset: 160)
 ```
-Value:       Symb(#19440)
-Constraints: &(List(>=([Const(0 (Port))]), <=([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])))
+Value: Symb(#19440)
+Constraints:
+  - IN [0 (Port) - Val: 65536 (0x10000)]
 ```
 
 #### `[DstPort]` (AbsOffset: 176)
 ```
-Value:       Symb(#-7197)
-Constraints: &(List(>=([Const(0 (Port))]), <=([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])))
+Value: Symb(#-7197)
+Constraints:
+  - IN [0 (Port) - Val: 65536 (0x10000)]
 ```
 
 #### `[SeqNo]` (AbsOffset: 192)
 ```
-Value:       Symb(#-9912)
+Value: Symb(#-9912)
 ```
 
 #### `[AckNo]` (AbsOffset: 224)
 ```
-Value:       Symb(#-5840)
+Value: Symb(#-5840)
 ```
 
 #### `[DataOffset]` (AbsOffset: 256)
 ```
-Value:       [Const(IP: 0.0.0.160 / MAC: 00:00:00:00:00:a0 / Val: 160)]
+Value: [Const(IP: 0.0.0.160 / MAC: 00:00:00:00:00:a0 / Val: 160)]
 ```
 
 #### `[Unknown (Offset 260)]` (AbsOffset: 260)
 ```
-Value:       Symb(#42065)
+Value: Symb(#42065)
 ```
 
 #### `[Unknown (Offset 263)]` (AbsOffset: 263)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 264)]` (AbsOffset: 264)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 265)]` (AbsOffset: 265)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 266)]` (AbsOffset: 266)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_NS]` (AbsOffset: 267)
 ```
-Value:       Symb(#41395)
+Value: Symb(#41395)
 ```
 
 #### `[Flag_CWR]` (AbsOffset: 268)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_ECE]` (AbsOffset: 269)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_URG]` (AbsOffset: 270)
 ```
-Value:       Symb(#71805)
+Value: Symb(#71805)
 ```
 
 ---
@@ -2567,10 +2605,10 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.180.0 (IP))]),:<=:([Const(1
 - **[host1 / host]** `AssignRaw(IPProto,Symb(#29174),GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(IPSrc,32)`
 - **[host1 / host]** `AssignRaw(IPSrc,Symb(#-1675),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(IPSrc,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])),None)`
+- **[host1 / host]** `ConstrainRaw(IPSrc,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(Val: 4294967296 (0x100000000))])),None)`
 - **[host1 / host]** `AllocateRaw(IPDst,32)`
 - **[host1 / host]** `AssignRaw(IPDst,Symb(#-7282),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(IPDst,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])),None)`
+- **[host1 / host]** `ConstrainRaw(IPDst,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(Val: 4294967296 (0x100000000))])),None)`
 - **[host1 / host]** `AllocateRaw(TTL,8)`
 - **[host1 / host]** `AssignRaw(TTL,[Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)],GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(TotalLength,16)`
@@ -2584,10 +2622,10 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.180.0 (IP))]),:<=:([Const(1
 - **[host1 / host]** `CreateTag(L4,TotalLength0)`
 - **[host1 / host]** `AllocateRaw(SrcPort,16)`
 - **[host1 / host]** `AssignRaw(SrcPort,Symb(#19440),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(SrcPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])),None)`
+- **[host1 / host]** `ConstrainRaw(SrcPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(Val: 65536 (0x10000))])),None)`
 - **[host1 / host]** `AllocateRaw(DstPort,16)`
 - **[host1 / host]** `AssignRaw(DstPort,Symb(#-7197),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(DstPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])),None)`
+- **[host1 / host]** `ConstrainRaw(DstPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(Val: 65536 (0x10000))])),None)`
 - **[host1 / host]** `AllocateRaw(SeqNo,32)`
 - **[host1 / host]** `AssignRaw(SeqNo,Symb(#-9912),GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(AckNo,32)`
@@ -2757,137 +2795,145 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.180.0 (IP))]),:<=:([Const(1
 
 #### `[EthDst]` (AbsOffset: -112)
 ```
-Value:       [Const(00:00:5e:00:53:00 (MAC))]
-Constraints: ==([Const(00:00:5e:00:53:00 (MAC))])
+Value: [Const(00:00:5e:00:53:00 (MAC))]
+Constraints:
+  - == 00:00:5e:00:53:00 (MAC)
 ```
 
 #### `[EthSrc]` (AbsOffset: -64)
 ```
-Value:       [Const(00:00:5e:00:53:11 (MAC))]
+Value: [Const(00:00:5e:00:53:11 (MAC))]
 ```
 
 #### `[EtherType]` (AbsOffset: -16)
 ```
-Value:       [Const(IPv4 (0x0800))]
+Value: [Const(IPv4 (0x0800))]
 ```
 
 #### `[IPVer_IHL]` (AbsOffset: 0)
 ```
-Value:       Symb(#-9116)
+Value: Symb(#-9116)
 ```
 
 #### `[DSCP_ECN]` (AbsOffset: 4)
 ```
-Value:       Symb(#-5033)
+Value: Symb(#-5033)
 ```
 
 #### `[TotalLength]` (AbsOffset: 16)
 ```
-Value:       Symb(#16052)
+Value: Symb(#16052)
 ```
 
 #### `[Identification]` (AbsOffset: 32)
 ```
-Value:       Symb(#73735)
+Value: Symb(#73735)
 ```
 
 #### `[TTL]` (AbsOffset: 64)
 ```
-Value:       [Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)]
+Value: [Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)]
 ```
 
 #### `[IPProto]` (AbsOffset: 72)
 ```
-Value:       Symb(#29174)
+Value: Symb(#29174)
 ```
 
 #### `[IPChecksum]` (AbsOffset: 80)
 ```
-Value:       Symb(#47508)
+Value: Symb(#47508)
 ```
 
 #### `[IPSrc]` (AbsOffset: 96)
 ```
-Value:       Symb(#-1675)
-Constraints: &(List(>=([Const(0.0.0.0 (IP))]), <=([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])))
+Value: Symb(#-1675)
+Constraints:
+  - IN [0.0.0.0 (IP) - Val: 4294967296 (0x100000000)]
 ```
 
 #### `[IPDst]` (AbsOffset: 128)
 ```
-Value:       Symb(#-7282)
-Constraints: ~(&(List(>=([Const(192.168.180.1 (IP))]), <=([Const(192.168.180.1 (IP))])))), ~(&(List(>=([Const(192.168.127.0 (IP))]), <=([Const(192.168.127.255 (IP))])))), ~(&(List(>=([Const(192.168.127.1 (IP))]), <=([Const(192.168.127.1 (IP))])))), &(List(>=([Const(0.0.0.0 (IP))]), <=([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])))
+Value: Symb(#-7282)
+Constraints:
+  - NOT IN [192.168.180.1 (IP) - 192.168.180.1 (IP)]
+  - NOT IN [192.168.127.0 (IP) - 192.168.127.255 (IP)]
+  - NOT IN [192.168.127.1 (IP) - 192.168.127.1 (IP)]
+  - IN [0.0.0.0 (IP) - Val: 4294967296 (0x100000000)]
 ```
 
 #### `[SrcPort]` (AbsOffset: 160)
 ```
-Value:       Symb(#19440)
-Constraints: &(List(>=([Const(0 (Port))]), <=([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])))
+Value: Symb(#19440)
+Constraints:
+  - IN [0 (Port) - Val: 65536 (0x10000)]
 ```
 
 #### `[DstPort]` (AbsOffset: 176)
 ```
-Value:       Symb(#-7197)
-Constraints: &(List(>=([Const(0 (Port))]), <=([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])))
+Value: Symb(#-7197)
+Constraints:
+  - IN [0 (Port) - Val: 65536 (0x10000)]
 ```
 
 #### `[SeqNo]` (AbsOffset: 192)
 ```
-Value:       Symb(#-9912)
+Value: Symb(#-9912)
 ```
 
 #### `[AckNo]` (AbsOffset: 224)
 ```
-Value:       Symb(#-5840)
+Value: Symb(#-5840)
 ```
 
 #### `[DataOffset]` (AbsOffset: 256)
 ```
-Value:       [Const(IP: 0.0.0.160 / MAC: 00:00:00:00:00:a0 / Val: 160)]
+Value: [Const(IP: 0.0.0.160 / MAC: 00:00:00:00:00:a0 / Val: 160)]
 ```
 
 #### `[Unknown (Offset 260)]` (AbsOffset: 260)
 ```
-Value:       Symb(#42065)
+Value: Symb(#42065)
 ```
 
 #### `[Unknown (Offset 263)]` (AbsOffset: 263)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 264)]` (AbsOffset: 264)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 265)]` (AbsOffset: 265)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 266)]` (AbsOffset: 266)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_NS]` (AbsOffset: 267)
 ```
-Value:       Symb(#41395)
+Value: Symb(#41395)
 ```
 
 #### `[Flag_CWR]` (AbsOffset: 268)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_ECE]` (AbsOffset: 269)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_URG]` (AbsOffset: 270)
 ```
-Value:       Symb(#71805)
+Value: Symb(#71805)
 ```
 
 ---
@@ -2919,10 +2965,10 @@ Memory object @ IPDst cannot :&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(255.255
 - **[host1 / host]** `AssignRaw(IPProto,Symb(#29174),GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(IPSrc,32)`
 - **[host1 / host]** `AssignRaw(IPSrc,Symb(#-1675),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(IPSrc,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])),None)`
+- **[host1 / host]** `ConstrainRaw(IPSrc,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(Val: 4294967296 (0x100000000))])),None)`
 - **[host1 / host]** `AllocateRaw(IPDst,32)`
 - **[host1 / host]** `AssignRaw(IPDst,Symb(#-7282),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(IPDst,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])),None)`
+- **[host1 / host]** `ConstrainRaw(IPDst,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(Val: 4294967296 (0x100000000))])),None)`
 - **[host1 / host]** `AllocateRaw(TTL,8)`
 - **[host1 / host]** `AssignRaw(TTL,[Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)],GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(TotalLength,16)`
@@ -2936,10 +2982,10 @@ Memory object @ IPDst cannot :&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(255.255
 - **[host1 / host]** `CreateTag(L4,TotalLength0)`
 - **[host1 / host]** `AllocateRaw(SrcPort,16)`
 - **[host1 / host]** `AssignRaw(SrcPort,Symb(#19440),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(SrcPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])),None)`
+- **[host1 / host]** `ConstrainRaw(SrcPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(Val: 65536 (0x10000))])),None)`
 - **[host1 / host]** `AllocateRaw(DstPort,16)`
 - **[host1 / host]** `AssignRaw(DstPort,Symb(#-7197),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(DstPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])),None)`
+- **[host1 / host]** `ConstrainRaw(DstPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(Val: 65536 (0x10000))])),None)`
 - **[host1 / host]** `AllocateRaw(SeqNo,32)`
 - **[host1 / host]** `AssignRaw(SeqNo,Symb(#-9912),GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(AckNo,32)`
@@ -3110,137 +3156,146 @@ Memory object @ IPDst cannot :&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(255.255
 
 #### `[EthDst]` (AbsOffset: -112)
 ```
-Value:       [Const(00:00:5e:00:53:00 (MAC))]
-Constraints: ==([Const(00:00:5e:00:53:00 (MAC))])
+Value: [Const(00:00:5e:00:53:00 (MAC))]
+Constraints:
+  - == 00:00:5e:00:53:00 (MAC)
 ```
 
 #### `[EthSrc]` (AbsOffset: -64)
 ```
-Value:       [Const(00:00:5e:00:53:11 (MAC))]
+Value: [Const(00:00:5e:00:53:11 (MAC))]
 ```
 
 #### `[EtherType]` (AbsOffset: -16)
 ```
-Value:       [Const(IPv4 (0x0800))]
+Value: [Const(IPv4 (0x0800))]
 ```
 
 #### `[IPVer_IHL]` (AbsOffset: 0)
 ```
-Value:       Symb(#-9116)
+Value: Symb(#-9116)
 ```
 
 #### `[DSCP_ECN]` (AbsOffset: 4)
 ```
-Value:       Symb(#-5033)
+Value: Symb(#-5033)
 ```
 
 #### `[TotalLength]` (AbsOffset: 16)
 ```
-Value:       Symb(#16052)
+Value: Symb(#16052)
 ```
 
 #### `[Identification]` (AbsOffset: 32)
 ```
-Value:       Symb(#73735)
+Value: Symb(#73735)
 ```
 
 #### `[TTL]` (AbsOffset: 64)
 ```
-Value:       [Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)]
+Value: [Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)]
 ```
 
 #### `[IPProto]` (AbsOffset: 72)
 ```
-Value:       Symb(#29174)
+Value: Symb(#29174)
 ```
 
 #### `[IPChecksum]` (AbsOffset: 80)
 ```
-Value:       Symb(#47508)
+Value: Symb(#47508)
 ```
 
 #### `[IPSrc]` (AbsOffset: 96)
 ```
-Value:       Symb(#-1675)
-Constraints: &(List(>=([Const(0.0.0.0 (IP))]), <=([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])))
+Value: Symb(#-1675)
+Constraints:
+  - IN [0.0.0.0 (IP) - Val: 4294967296 (0x100000000)]
 ```
 
 #### `[IPDst]` (AbsOffset: 128)
 ```
-Value:       Symb(#-7282)
-Constraints: ~(&(List(>=([Const(192.168.180.0 (IP))]), <=([Const(192.168.183.255 (IP))])))), ~(&(List(>=([Const(192.168.180.1 (IP))]), <=([Const(192.168.180.1 (IP))])))), ~(&(List(>=([Const(192.168.127.0 (IP))]), <=([Const(192.168.127.255 (IP))])))), ~(&(List(>=([Const(192.168.127.1 (IP))]), <=([Const(192.168.127.1 (IP))])))), &(List(>=([Const(0.0.0.0 (IP))]), <=([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])))
+Value: Symb(#-7282)
+Constraints:
+  - NOT IN [192.168.180.0 (IP) - 192.168.183.255 (IP)]
+  - NOT IN [192.168.180.1 (IP) - 192.168.180.1 (IP)]
+  - NOT IN [192.168.127.0 (IP) - 192.168.127.255 (IP)]
+  - NOT IN [192.168.127.1 (IP) - 192.168.127.1 (IP)]
+  - IN [0.0.0.0 (IP) - Val: 4294967296 (0x100000000)]
 ```
 
 #### `[SrcPort]` (AbsOffset: 160)
 ```
-Value:       Symb(#19440)
-Constraints: &(List(>=([Const(0 (Port))]), <=([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])))
+Value: Symb(#19440)
+Constraints:
+  - IN [0 (Port) - Val: 65536 (0x10000)]
 ```
 
 #### `[DstPort]` (AbsOffset: 176)
 ```
-Value:       Symb(#-7197)
-Constraints: &(List(>=([Const(0 (Port))]), <=([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])))
+Value: Symb(#-7197)
+Constraints:
+  - IN [0 (Port) - Val: 65536 (0x10000)]
 ```
 
 #### `[SeqNo]` (AbsOffset: 192)
 ```
-Value:       Symb(#-9912)
+Value: Symb(#-9912)
 ```
 
 #### `[AckNo]` (AbsOffset: 224)
 ```
-Value:       Symb(#-5840)
+Value: Symb(#-5840)
 ```
 
 #### `[DataOffset]` (AbsOffset: 256)
 ```
-Value:       [Const(IP: 0.0.0.160 / MAC: 00:00:00:00:00:a0 / Val: 160)]
+Value: [Const(IP: 0.0.0.160 / MAC: 00:00:00:00:00:a0 / Val: 160)]
 ```
 
 #### `[Unknown (Offset 260)]` (AbsOffset: 260)
 ```
-Value:       Symb(#42065)
+Value: Symb(#42065)
 ```
 
 #### `[Unknown (Offset 263)]` (AbsOffset: 263)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 264)]` (AbsOffset: 264)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 265)]` (AbsOffset: 265)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 266)]` (AbsOffset: 266)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_NS]` (AbsOffset: 267)
 ```
-Value:       Symb(#41395)
+Value: Symb(#41395)
 ```
 
 #### `[Flag_CWR]` (AbsOffset: 268)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_ECE]` (AbsOffset: 269)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_URG]` (AbsOffset: 270)
 ```
-Value:       Symb(#71805)
+Value: Symb(#71805)
 ```
 
 ---
@@ -3272,10 +3327,10 @@ No route
 - **[host1 / host]** `AssignRaw(IPProto,Symb(#29174),GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(IPSrc,32)`
 - **[host1 / host]** `AssignRaw(IPSrc,Symb(#-1675),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(IPSrc,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])),None)`
+- **[host1 / host]** `ConstrainRaw(IPSrc,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(Val: 4294967296 (0x100000000))])),None)`
 - **[host1 / host]** `AllocateRaw(IPDst,32)`
 - **[host1 / host]** `AssignRaw(IPDst,Symb(#-7282),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(IPDst,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])),None)`
+- **[host1 / host]** `ConstrainRaw(IPDst,:&:(:>=:([Const(0.0.0.0 (IP))]),:<=:([Const(Val: 4294967296 (0x100000000))])),None)`
 - **[host1 / host]** `AllocateRaw(TTL,8)`
 - **[host1 / host]** `AssignRaw(TTL,[Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)],GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(TotalLength,16)`
@@ -3289,10 +3344,10 @@ No route
 - **[host1 / host]** `CreateTag(L4,TotalLength0)`
 - **[host1 / host]** `AllocateRaw(SrcPort,16)`
 - **[host1 / host]** `AssignRaw(SrcPort,Symb(#19440),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(SrcPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])),None)`
+- **[host1 / host]** `ConstrainRaw(SrcPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(Val: 65536 (0x10000))])),None)`
 - **[host1 / host]** `AllocateRaw(DstPort,16)`
 - **[host1 / host]** `AssignRaw(DstPort,Symb(#-7197),GenericNumeric)`
-- **[host1 / host]** `ConstrainRaw(DstPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])),None)`
+- **[host1 / host]** `ConstrainRaw(DstPort,:&:(:>=:([Const(0 (Port))]),:<=:([Const(Val: 65536 (0x10000))])),None)`
 - **[host1 / host]** `AllocateRaw(SeqNo,32)`
 - **[host1 / host]** `AssignRaw(SeqNo,Symb(#-9912),GenericNumeric)`
 - **[host1 / host]** `AllocateRaw(AckNo,32)`
@@ -3464,135 +3519,145 @@ No route
 
 #### `[EthDst]` (AbsOffset: -112)
 ```
-Value:       [Const(00:00:5e:00:53:00 (MAC))]
-Constraints: ==([Const(00:00:5e:00:53:00 (MAC))])
+Value: [Const(00:00:5e:00:53:00 (MAC))]
+Constraints:
+  - == 00:00:5e:00:53:00 (MAC)
 ```
 
 #### `[EthSrc]` (AbsOffset: -64)
 ```
-Value:       [Const(00:00:5e:00:53:11 (MAC))]
+Value: [Const(00:00:5e:00:53:11 (MAC))]
 ```
 
 #### `[EtherType]` (AbsOffset: -16)
 ```
-Value:       [Const(IPv4 (0x0800))]
+Value: [Const(IPv4 (0x0800))]
 ```
 
 #### `[IPVer_IHL]` (AbsOffset: 0)
 ```
-Value:       Symb(#-9116)
+Value: Symb(#-9116)
 ```
 
 #### `[DSCP_ECN]` (AbsOffset: 4)
 ```
-Value:       Symb(#-5033)
+Value: Symb(#-5033)
 ```
 
 #### `[TotalLength]` (AbsOffset: 16)
 ```
-Value:       Symb(#16052)
+Value: Symb(#16052)
 ```
 
 #### `[Identification]` (AbsOffset: 32)
 ```
-Value:       Symb(#73735)
+Value: Symb(#73735)
 ```
 
 #### `[TTL]` (AbsOffset: 64)
 ```
-Value:       [Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)]
+Value: [Const(IP: 0.0.0.255 / MAC: 00:00:00:00:00:ff / Val: 255)]
 ```
 
 #### `[IPProto]` (AbsOffset: 72)
 ```
-Value:       Symb(#29174)
+Value: Symb(#29174)
 ```
 
 #### `[IPChecksum]` (AbsOffset: 80)
 ```
-Value:       Symb(#47508)
+Value: Symb(#47508)
 ```
 
 #### `[IPSrc]` (AbsOffset: 96)
 ```
-Value:       Symb(#-1675)
-Constraints: &(List(>=([Const(0.0.0.0 (IP))]), <=([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])))
+Value: Symb(#-1675)
+Constraints:
+  - IN [0.0.0.0 (IP) - Val: 4294967296 (0x100000000)]
 ```
 
 #### `[IPDst]` (AbsOffset: 128)
 ```
-Value:       Symb(#-7282)
-Constraints: ~(&(List(>=([Const(0.0.0.0 (IP))]), <=([Const(255.255.255.255 (IP))])))), ~(&(List(>=([Const(192.168.180.0 (IP))]), <=([Const(192.168.183.255 (IP))])))), ~(&(List(>=([Const(192.168.180.1 (IP))]), <=([Const(192.168.180.1 (IP))])))), ~(&(List(>=([Const(192.168.127.0 (IP))]), <=([Const(192.168.127.255 (IP))])))), ~(&(List(>=([Const(192.168.127.1 (IP))]), <=([Const(192.168.127.1 (IP))])))), &(List(>=([Const(0.0.0.0 (IP))]), <=([Const(MAC: 00:01:00:00:00:00 / Val: 4294967296 (0x100000000))])))
+Value: Symb(#-7282)
+Constraints:
+  - NOT IN [0.0.0.0 (IP) - 255.255.255.255 (IP)]
+  - NOT IN [192.168.180.0 (IP) - 192.168.183.255 (IP)]
+  - NOT IN [192.168.180.1 (IP) - 192.168.180.1 (IP)]
+  - NOT IN [192.168.127.0 (IP) - 192.168.127.255 (IP)]
+  - NOT IN [192.168.127.1 (IP) - 192.168.127.1 (IP)]
+  - IN [0.0.0.0 (IP) - Val: 4294967296 (0x100000000)]
 ```
 
 #### `[SrcPort]` (AbsOffset: 160)
 ```
-Value:       Symb(#19440)
-Constraints: &(List(>=([Const(0 (Port))]), <=([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])))
+Value: Symb(#19440)
+Constraints:
+  - IN [0 (Port) - Val: 65536 (0x10000)]
 ```
 
 #### `[DstPort]` (AbsOffset: 176)
 ```
-Value:       Symb(#-7197)
-Constraints: &(List(>=([Const(0 (Port))]), <=([Const(IP: 0.1.0.0 / MAC: 00:00:00:01:00:00 / Val: 65536 (0x10000))])))
+Value: Symb(#-7197)
+Constraints:
+  - IN [0 (Port) - Val: 65536 (0x10000)]
 ```
 
 #### `[SeqNo]` (AbsOffset: 192)
 ```
-Value:       Symb(#-9912)
+Value: Symb(#-9912)
 ```
 
 #### `[AckNo]` (AbsOffset: 224)
 ```
-Value:       Symb(#-5840)
+Value: Symb(#-5840)
 ```
 
 #### `[DataOffset]` (AbsOffset: 256)
 ```
-Value:       [Const(IP: 0.0.0.160 / MAC: 00:00:00:00:00:a0 / Val: 160)]
+Value: [Const(IP: 0.0.0.160 / MAC: 00:00:00:00:00:a0 / Val: 160)]
 ```
 
 #### `[Unknown (Offset 260)]` (AbsOffset: 260)
 ```
-Value:       Symb(#42065)
+Value: Symb(#42065)
 ```
 
 #### `[Unknown (Offset 263)]` (AbsOffset: 263)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 264)]` (AbsOffset: 264)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 265)]` (AbsOffset: 265)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Unknown (Offset 266)]` (AbsOffset: 266)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_NS]` (AbsOffset: 267)
 ```
-Value:       Symb(#41395)
+Value: Symb(#41395)
 ```
 
 #### `[Flag_CWR]` (AbsOffset: 268)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_ECE]` (AbsOffset: 269)
 ```
-Value:       [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
+Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
 #### `[Flag_URG]` (AbsOffset: 270)
 ```
-Value:       Symb(#71805)
+Value: Symb(#71805)
 ```

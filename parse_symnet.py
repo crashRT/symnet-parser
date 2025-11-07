@@ -30,9 +30,15 @@ def format_constant(val_str: str, context_field_name: str | None = None) -> str:
         if context_field_name.startswith("IP"):
             if (ip_val := int_to_ip(val)):
                 return f"{ip_val} (IP)"
+            else:
+                # IPフィールドだが範囲外の値
+                return f"Val: {val} (0x{val:x})"
         elif context_field_name.startswith("Eth"):
             if (mac_val := int_to_mac(val)):
                 return f"{mac_val} (MAC)"
+            else:
+                # MACフィールドだが範囲外の値
+                return f"Val: {val} (0x{val:x})"
         elif context_field_name.endswith("Port"):
             if 0 <= val <= 65535:
                 if val == 80: return "80 (Port: HTTP)"
@@ -40,6 +46,9 @@ def format_constant(val_str: str, context_field_name: str | None = None) -> str:
                 if val == 22: return "22 (Port: SSH)"
                 if val == 53: return "53 (Port: DNS)"
                 return f"{val} (Port)"
+            else:
+                # ポートフィールドだが範囲外の値
+                return f"Val: {val} (0x{val:x})"
 
     possible_formats = []
     ip_val = int_to_ip(val)
@@ -101,6 +110,36 @@ class SymNetParser:
             node_module = parts[0]
             return node_module.split('-', 1) if '-' in node_module else (node_module, '')
         return (port_name, '')
+    
+    def _format_constraint(self, constraint: str) -> str:
+        """制約を読みやすく整形する"""
+        # ~(&(List(...))) のような否定制約を検出
+        if constraint.startswith('~(&(List('):
+            # 否定制約を抽出
+            inner = constraint[9:-3]  # "~(&(List(" と ")))" を削除
+            parts = inner.split('), ')
+            if len(parts) == 2:
+                # [Const(...)] の部分を抽出
+                min_part = parts[0].split('[Const(')[1].split(')]')[0]
+                max_part = parts[1].split('[Const(')[1].split(')]')[0]
+                return f"NOT IN [{min_part} - {max_part}]"
+        
+        # &(List(...)) のような範囲制約を検出
+        elif constraint.startswith('&(List('):
+            inner = constraint[7:-2]  # "&(List(" と "))" を削除
+            parts = inner.split('), ')
+            if len(parts) == 2:
+                # [Const(...)] の部分を抽出
+                min_part = parts[0].split('[Const(')[1].split(')]')[0]
+                max_part = parts[1].split('[Const(')[1].split(')]')[0]
+                return f"IN [{min_part} - {max_part}]"
+        
+        # ==(...) のような等価制約
+        elif constraint.startswith('==([Const('):
+            value = constraint.split('[Const(')[1].split(')]')[0]
+            return f"== {value}"
+        
+        return constraint
 
     # ( _translate_string は変更なし)
     def _translate_string(self, s: str, context_field_name: str | None = None) -> str:
@@ -236,9 +275,12 @@ class SymNetParser:
             
             md_lines.append(f"\n#### `[{field_name}]` (AbsOffset: {offset})")
             md_lines.append("```")
-            md_lines.append(f"Value:       {expr}")
+            md_lines.append(f"Value: {expr}")
             if constraints:
-                md_lines.append(f"Constraints: {', '.join(constraints)}")
+                md_lines.append("Constraints:")
+                for c in constraints:
+                    formatted = self._format_constraint(c)
+                    md_lines.append(f"  - {formatted}")
             md_lines.append("```")
 
         return "\n".join(md_lines)
