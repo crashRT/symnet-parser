@@ -3,7 +3,11 @@ import re
 import ipaddress
 from typing import Dict, Any
 
-# --- 1. 定数変換ヘルパー関数 (変更なし) ---
+# --- 1. 定数変換ヘルパー関数 ---
+
+# SymNetでは、Z3のInt型の範囲制限（-2^31 ~ 2^31-1）に対応するため、
+# IPアドレスを格納する際に2^31を引いている
+IP_OFFSET = 2147483648  # 2^31
 
 def int_to_mac(val: int) -> str | None:
     if not (0 <= val <= 281474976710655):
@@ -12,9 +16,12 @@ def int_to_mac(val: int) -> str | None:
     return ':'.join(hex_str[i:i+2] for i in (0, 2, 4, 6, 8, 10))
 
 def int_to_ip(val: int) -> str | None:
-    if not (0 <= val <= 4294967295):
+    # SymNetから来た値は2^31引かれているので、元に戻す
+    unsigned_val = val + IP_OFFSET
+    
+    if not (0 <= unsigned_val <= 4294967295):
         return None
-    return str(ipaddress.IPv4Address(val))
+    return str(ipaddress.IPv4Address(unsigned_val))
 
 def format_constant(val_str: str, context_field_name: str | None = None) -> str:
     try:
