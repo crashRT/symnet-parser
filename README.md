@@ -47,9 +47,9 @@ SymNet は、ネットワークの動作を記号実行によって検証する�
 ノードが変わるごとに改行を挿入し、パケットの経路を視覚的に把握しやすくします：
 
 ```
-`host1-host-out` -> `host1-veth1-out`  
-`ap-wifi1_i-in` -> `ap-wifi1_i-out` -> `ap-ap_bridge-in`  
-`ap-ap_bridge-out` -> `ap-eth1-out`  
+`host1-host-out` -> `host1-veth1-out`
+`ap-wifi1_i-in` -> `ap-wifi1_i-out` -> `ap-ap_bridge-in`
+`ap-ap_bridge-out` -> `ap-eth1-out`
 ```
 
 ### ノード・モジュール情報の表示（削除）
@@ -58,7 +58,7 @@ SymNet は、ネットワークの動作を記号実行によって検証する�
 
 ~~```~~  
 ~~[Node: RTX1210 | Module: ip_forward]~~  
-~~  - If(...) Then Forward('RTX1210-lan1.1-eth) Else NoOp~~  
+~~ - If(...) Then Forward('RTX1210-lan1.1-eth) Else NoOp~~  
 ~~```~~
 
 **注**: 現在のバージョンでは、命令トレースは Forward 命令ごとに区切られ、NoOp 命令は簡略化されます。
@@ -85,6 +85,7 @@ python3 parse_symnet.py
 - **出力**: `symnet_report.md`
 
 出力には以下が含まれます：
+
 - サマリーセクション（OK/FAIL の件数と失敗ステータス）
 - 各実行パスの詳細レポート（OK と FAIL にラベル付け）
 
@@ -147,15 +148,19 @@ Markdown 形式のレポートが生成され、以下のセクションで構�
 # 🔍 SymNet 解析サマリー
 
 **総数**: 131 件
+
 - ✅ **OK**: 3 件
 - ❌ **FAIL**: 128 件
 
-## ❌ FAILの詳細
+## ❌ FAIL の詳細
 
 ### FAIL 1
 ```
+
 Fail(cannot :&:(:>=:([Const(-2147483648)]), :<=:([Const(2147483647)])))
+
 ```
+
 ```
 
 ### 1. Status（検証結果）
@@ -165,8 +170,11 @@ Fail(cannot :&:(:>=:([Const(-2147483648)]), :<=:([Const(2147483647)])))
 
 ## 🚦 1. 最終ステータス (Status)
 ```
+
 Success(rtx1210-lan3_o-out)
+
 ```
+
 ```
 
 ### 2. Port Trace（ポート経路）
@@ -176,7 +184,7 @@ Success(rtx1210-lan3_o-out)
 
 **Path:**
 `host1-host-in` -> `host1-host-out` -> `host1-veth1-out`  
-`ap-wifi1_i-in` -> `ap-wifi1_i-out` -> `ap-ap_bridge-in`  
+`ap-wifi1_i-in` -> `ap-wifi1_i-out` -> `ap-ap_bridge-in`
 ```
 
 ### 3. Instruction Trace（命令トレース）
@@ -198,57 +206,62 @@ Success(rtx1210-lan3_o-out)
 ## 🧠 4. 最終的なパケットのメモリ状態 (Final Memory State)
 
 ### タグ (Tags)
+
 `L2: 0`, `L3: 112`, `L4: 272`
 
 ### ヘッダーフィールド (Header Fields)
 
 #### `[EthDst]` (AbsOffset: 0)
 ```
+
 Value: Symb(#12345)
 Constraints:
-  - == aa:bb:cc:dd:ee:ff (MAC)
+
+- == aa:bb:cc:dd:ee:ff (MAC)
+
 ```
+
 ```
 
 ## フィールド名の対応表
 
 スクリプトは以下のオフセットをフィールド名に変換します：
 
-### L2（レイヤー2 - イーサネット）
+### L2（レイヤー 2 - イーサネット）
 
-| オフセット | フィールド名 | 説明                           |
-| ---------- | ------------ | ------------------------------ |
-| 0          | EthDst       | イーサネット宛先 MAC アドレス  |
+| オフセット | フィールド名 | 説明                            |
+| ---------- | ------------ | ------------------------------- |
+| 0          | EthDst       | イーサネット宛先 MAC アドレス   |
 | 48         | EthSrc       | イーサネット送信元 MAC アドレス |
-| 96         | EtherType    | イーサネットタイプ             |
+| 96         | EtherType    | イーサネットタイプ              |
 | 112        | VLAN_PCP     | VLAN 優先度（3 ビット）         |
 | 115        | VLAN_DEI     | VLAN Drop Eligible（1 ビット）  |
 | 116        | VLAN_VID     | VLAN ID（12 ビット）            |
 
-### L3（レイヤー3 - IP）
+### L3（レイヤー 3 - IP）
 
-| オフセット | フィールド名   | 説明                |
-| ---------- | -------------- | ------------------- |
+| オフセット | フィールド名   | 説明                     |
+| ---------- | -------------- | ------------------------ |
 | 0          | IPVer_IHL      | IP バージョン+ヘッダー長 |
-| 4          | DSCP_ECN       | サービスタイプ      |
-| 16         | TotalLength    | パケット長          |
-| 32         | Identification | 識別子              |
-| 64         | TTL            | 生存時間            |
-| 72         | IPProto        | プロトコル          |
-| 80         | IPChecksum     | チェックサム        |
-| 96         | IPSrc          | 送信元 IP アドレス   |
-| 128        | IPDst          | 宛先 IP アドレス     |
+| 4          | DSCP_ECN       | サービスタイプ           |
+| 16         | TotalLength    | パケット長               |
+| 32         | Identification | 識別子                   |
+| 64         | TTL            | 生存時間                 |
+| 72         | IPProto        | プロトコル               |
+| 80         | IPChecksum     | チェックサム             |
+| 96         | IPSrc          | 送信元 IP アドレス       |
+| 128        | IPDst          | 宛先 IP アドレス         |
 
-### L4（レイヤー4 - TCP/UDP）
+### L4（レイヤー 4 - TCP/UDP）
 
-| オフセット | フィールド名 | 説明                      |
-| ---------- | ------------ | ------------------------- |
-| 0          | SrcPort      | 送信元ポート番号          |
-| 16         | DstPort      | 宛先ポート番号            |
-| 32         | SeqNo        | シーケンス番号（TCP）      |
-| 64         | AckNo        | 確認応答番号（TCP）        |
-| 96         | DataOffset   | データオフセット（TCP）    |
-| 107-115    | Flag_*       | TCP フラグ（NS～FIN）      |
+| オフセット | フィールド名 | 説明                    |
+| ---------- | ------------ | ----------------------- |
+| 0          | SrcPort      | 送信元ポート番号        |
+| 16         | DstPort      | 宛先ポート番号          |
+| 32         | SeqNo        | シーケンス番号（TCP）   |
+| 64         | AckNo        | 確認応答番号（TCP）     |
+| 96         | DataOffset   | データオフセット（TCP） |
+| 107-115    | Flag\_\*     | TCP フラグ（NS ～ FIN） |
 
 ## カスタマイズ
 
@@ -258,9 +271,9 @@ Constraints:
 
 ```python
 self.KNOWN_OFFSETS = {
-    'L2': { 
-        0: 'EthDst', 
-        48: 'EthSrc', 
+    'L2': {
+        0: 'EthDst',
+        48: 'EthSrc',
         # ...
         144: 'YourNewField',  # 新しいフィールドを追加
     },
@@ -295,7 +308,7 @@ def _format_constraint(self, constraint: str) -> str:
 警告: 'sefl.ok.json' が見つかりません。スキップします。
 ```
 
-→ `sefl.ok.json` または `sefl.fail.json` が同じディレクトリに存在することを確認してください。両方のファイルがなくてもエラーにはなりませんが、少なくとも1つは必要です。
+→ `sefl.ok.json` または `sefl.fail.json` が同じディレクトリに存在することを確認してください。両方のファイルがなくてもエラーにはなりませんが、少なくとも 1 つは必要です。
 
 ### JSON 形式エラー
 
@@ -325,7 +338,6 @@ def _format_constraint(self, constraint: str) -> str:
   - 複数の JSON ファイル（sefl.ok.json, sefl.fail.json）からの読み込み
   - OK/FAIL ラベルをレポートタイトルに表示
   - VLAN フィールドの追加（VLAN_PCP, VLAN_DEI, VLAN_VID）
-  
 - **2025-11-13 (v1)**: 初版作成
   - ポート名に個別バッククォート追加
   - ポートトレースの改行処理（ノード単位）
