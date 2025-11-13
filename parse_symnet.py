@@ -135,7 +135,7 @@ class SymNetParser:
             return (node, module)
         return (port_name, '')
     
-    def _format_constraint(self, constraint: str) -> str:
+    def _format_constraint(self, constraint: str, context_field_name: str | None = None) -> str:
         """制約を読みやすく整形する"""
         # ~(&(List(...))) のような否定制約を検出
         if constraint.startswith('~(&(List('):
@@ -146,7 +146,10 @@ class SymNetParser:
                 # [Const(...)] の部分を抽出
                 min_part = parts[0].split('[Const(')[1].split(')]')[0]
                 max_part = parts[1].split('[Const(')[1].split(')]')[0]
-                return f"NOT IN [{min_part} - {max_part}]"
+                # 値を変換
+                min_formatted = format_constant(min_part, context_field_name)
+                max_formatted = format_constant(max_part, context_field_name)
+                return f"NOT IN [{min_formatted} - {max_formatted}]"
         
         # &(List(...)) のような範囲制約を検出
         elif constraint.startswith('&(List('):
@@ -156,12 +159,17 @@ class SymNetParser:
                 # [Const(...)] の部分を抽出
                 min_part = parts[0].split('[Const(')[1].split(')]')[0]
                 max_part = parts[1].split('[Const(')[1].split(')]')[0]
-                return f"IN [{min_part} - {max_part}]"
+                # 値を変換
+                min_formatted = format_constant(min_part, context_field_name)
+                max_formatted = format_constant(max_part, context_field_name)
+                return f"IN [{min_formatted} - {max_formatted}]"
         
         # ==(...) のような等価制約
         elif constraint.startswith('==([Const('):
             value = constraint.split('[Const(')[1].split(')]')[0]
-            return f"== {value}"
+            # 値を変換
+            value_formatted = format_constant(value, context_field_name)
+            return f"== {value_formatted}"
         
         return constraint
 
@@ -177,8 +185,9 @@ class SymNetParser:
                     inferred_context = name
                     break 
 
+        # 負の数にも対応するように -? を追加
         s = re.sub(
-            r'\[Const\((\d+)\)\]',
+            r'\[Const\((-?\d+)\)\]',
             lambda m: f"[Const({format_constant(m.group(1), inferred_context)})]",
             s
         )
@@ -288,7 +297,8 @@ class SymNetParser:
             if constraints:
                 md_lines.append("Constraints:")
                 for c in constraints:
-                    formatted = self._format_constraint(c)
+                    # field_nameを渡して値を変換
+                    formatted = self._format_constraint(c, field_name)
                     md_lines.append(f"  - {formatted}")
             md_lines.append("```")
 
