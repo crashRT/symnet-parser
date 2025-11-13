@@ -280,56 +280,103 @@ class SymNetParser:
 
         return "\n".join(md_lines)
 
-# --- 3. 実行 (変更なし) ---
+# --- 3. 実行 ---
 if __name__ == "__main__":
-    input_json_file = 'symnet_output.json'
-    output_markdown_file = 'symnet_report.md'
+    input_json_files = [
+        ('sefl.ok.json', '✅ OK'),
+        ('sefl.fail.json', '❌ FAIL')
+    ]
     
     all_markdown_reports = [] 
+    ok_count = 0
+    fail_count = 0
+    fail_statuses = []
 
-    try:
-        with open(input_json_file, 'r') as f:
-            data_list = json.load(f) 
-            
-        if not isinstance(data_list, list):
-            if isinstance(data_list, dict):
-                data_list = [data_list]
-            else:
-                print(f"エラー: 入力JSONはオブジェクトまたはオブジェクトのリストである必要があります。")
-                exit() 
-
-        if not data_list:
-            print("警告: 入力JSONリストが空です。")
-            exit()
-
-        for i, data_item in enumerate(data_list):
-            if not isinstance(data_item, dict):
-                print(f"警告: リストの {i} 番目のアイテムがJSONオブジェクトではありません。スキップします。")
-                continue
+    for input_json_file, status_label in input_json_files:
+        try:
+            with open(input_json_file, 'r') as f:
+                data_list = json.load(f) 
                 
-            parser = SymNetParser(data_item)
-            markdown_output = parser.to_markdown()
-            
-            report_title = f"# SymNet 解析レポート ({i + 1} / {len(data_list)})"
-            
-            markdown_output = markdown_output.replace(
-                "# SymNet 解析レポート", 
-                report_title
-            )
-            
-            all_markdown_reports.append(markdown_output)
+            if not isinstance(data_list, list):
+                if isinstance(data_list, dict):
+                    data_list = [data_list]
+                else:
+                    print(f"エラー: {input_json_file} の形式が不正です。")
+                    continue
 
-        if not all_markdown_reports:
-            print("エラー: 有効なレポートが生成されませんでした。")
-            exit()
+            if not data_list:
+                print(f"警告: {input_json_file} が空です。")
+                continue
 
-        with open(output_markdown_file, 'w', encoding='utf-8') as f:
-            f.write("\n\n---\n<br/>\n---\n\n".join(all_markdown_reports))
+            for data_item in data_list:
+                if not isinstance(data_item, dict):
+                    print(f"警告: {input_json_file} 内の一部のアイテムがJSONオブジェクトではありません。スキップします。")
+                    continue
+                    
+                parser = SymNetParser(data_item)
+                markdown_output = parser.to_markdown()
+                all_markdown_reports.append((markdown_output, status_label))
+                
+                # OK/FAILのカウント
+                if status_label == '✅ OK':
+                    ok_count += 1
+                else:
+                    fail_count += 1
+                    # FAILの場合はステータスを記録
+                    status = data_item.get('status', 'Unknown')
+                    fail_statuses.append(status)
             
-        print(f"✅ {len(all_markdown_reports)} 件のレポート生成が完了しました: {output_markdown_file}")
+            print(f"✅ {input_json_file} を読み込みました ({len(data_list)} 件)")
+                
+        except FileNotFoundError:
+            print(f"警告: '{input_json_file}' が見つかりません。スキップします。")
+        except json.JSONDecodeError:
+            print(f"エラー: {input_json_file} のJSONパースに失敗しました。")
+
+    if not all_markdown_reports:
+        print("エラー: 有効なレポートが生成されませんでした。")
+        exit()
+
+    # サマリーセクションを作成
+    summary_lines = []
+    summary_lines.append("# 🔍 SymNet 解析サマリー\n")
+    summary_lines.append(f"**総数**: {ok_count + fail_count} 件")
+    summary_lines.append(f"- ✅ **OK**: {ok_count} 件")
+    summary_lines.append(f"- ❌ **FAIL**: {fail_count} 件\n")
+    
+    if fail_count > 0:
+        summary_lines.append("## ❌ FAILの詳細\n")
+        for i, status in enumerate(fail_statuses, 1):
+            # ステータスを整形（最初のparserのインスタンスを使用）
+            formatted_status = all_markdown_reports[0][0]  # ダミー
+            # 新しいダミーパーサーを作成してステータスを整形
+            dummy_parser = SymNetParser({'memory': {'tags': []}, 'status': status, 'port_trace': [], 'instruction_trace': []})
+            formatted_status = dummy_parser._translate_string(status)
+            
+            summary_lines.append(f"### FAIL {i}")
+            summary_lines.append("```")
+            summary_lines.append(formatted_status)
+            summary_lines.append("```\n")
+    
+    summary = "\n".join(summary_lines)
+
+    # レポート番号を付与
+    total = len(all_markdown_reports)
+    formatted_reports = []
+    for i in range(total):
+        markdown_output, status_label = all_markdown_reports[i]
+        report_title = f"# SymNet 解析レポート ({i + 1} / {total}) {status_label}"
+        markdown_output = markdown_output.replace(
+            "# SymNet 解析レポート", 
+            report_title
+        )
+        formatted_reports.append(markdown_output)
+
+    # 結果を書き出し（サマリーを先頭に追加）
+    output_markdown_file = 'symnet_report.md'
+    with open(output_markdown_file, 'w', encoding='utf-8') as f:
+        f.write(summary)
+        f.write("\n---\n<br/>\n---\n\n")
+        f.write("\n\n---\n<br/>\n---\n\n".join(formatted_reports))
         
-    except FileNotFoundError:
-        print(f"エラー: '{input_json_file}' が見つかりません。")
-        print(f"JSONデータを '{input_json_file}' という名前で保存してください。")
-    except json.JSONDecodeError:
-        print("エラー: JSONのパースに失敗しました。ファイルが破損している可能性があります。")
+    print(f"✅ 合計 {total} 件のレポート生成が完了しました: {output_markdown_file}")
