@@ -227,37 +227,22 @@ class SymNetParser:
         # --- 3. Instruction Trace ---
         md_lines.append("## 📜 3. 実行された命令 (Instruction Trace)")
         
-        # 命令とポートを対応付ける
-        current_node = None
-        current_module = None
-        port_idx = 0
-        
-        # 最初のポートから開始
-        if 0 in port_map:
-            current_node, current_module = self._parse_port_name(port_map[0])
-        
-        for item in self.data['instruction_trace']:
+        for i, item in enumerate(self.data['instruction_trace']):
             idx_str, instruction = list(item.items())[0]
-            
-            # Forward命令でポートが変わる
-            if instruction.startswith('Forward('):
-                port_idx += 1
-                if port_idx in port_map:
-                    current_node, current_module = self._parse_port_name(port_map[port_idx])
             
             # NoOp命令を簡略化
             if instruction.startswith('org.change.v2.analysis.processingmodels.instructions.NoOp'):
                 instruction = 'NoOp'
             
-            # ノード・モジュール情報を付加
-            location = ""
-            if current_node:
-                if current_module:
-                    location = f"**[{current_node} / {current_module}]** "
-                else:
-                    location = f"**[{current_node}]** "
+            is_forward = instruction.startswith('Forward(')
             
-            md_lines.append(f"- {location}`{self._translate_string(instruction)}`")
+            md_lines.append(f"- `{self._translate_string(instruction)}`")
+            
+            # Forward命令のあとに区切り線を追加（最後のForwardを除く）
+            if is_forward and i < len(self.data['instruction_trace']) - 1:
+                md_lines.append("")
+                md_lines.append("---")
+                md_lines.append("")
         
         md_lines.append("\n")
 
