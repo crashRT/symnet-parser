@@ -105,10 +105,20 @@ class SymNetParser:
     
     def _parse_port_name(self, port_name: str) -> tuple[str, str]:
         """ポート名からノード名とモジュール名を抽出する"""
-        parts = port_name.rsplit('-', 1)
+        # ポート名の形式: <ノード>-<モジュール>-<方向>
+        # 例: host1-host-in, ap-wifi1_i-in, rtx1210-lan1_i-in
+        parts = port_name.split('-', 1)  # 最初の '-' で分割
         if len(parts) == 2:
-            node_module = parts[0]
-            return node_module.split('-', 1) if '-' in node_module else (node_module, '')
+            node = parts[0]
+            # 残りの部分から方向 ("-in", "-out") を除去
+            module_part = parts[1]
+            if module_part.endswith('-in'):
+                module = module_part[:-3]
+            elif module_part.endswith('-out'):
+                module = module_part[:-4]
+            else:
+                module = module_part
+            return (node, module)
         return (port_name, '')
     
     def _format_constraint(self, constraint: str) -> str:
