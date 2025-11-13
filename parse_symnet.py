@@ -81,7 +81,14 @@ def format_constant(val_str: str, context_field_name: str | None = None) -> str:
 class SymNetParser:
     
     KNOWN_OFFSETS = {
-        'L2': { 0: 'EthDst', 48: 'EthSrc', 96: 'EtherType' },
+        'L2': { 
+            0: 'EthDst', 
+            48: 'EthSrc', 
+            96: 'EtherType',
+            112: 'VLAN_PCP',      # Priority Code Point (3 bits)
+            115: 'VLAN_DEI',      # Drop Eligible Indicator (1 bit)
+            116: 'VLAN_VID'       # VLAN Identifier (12 bits)
+        },
         'L3': { 0: 'IPVer_IHL', 4: 'DSCP_ECN', 16: 'TotalLength', 32: 'Identification', 64: 'TTL', 72: 'IPProto', 80: 'IPChecksum', 96: 'IPSrc', 128: 'IPDst' },
         'L4': { 0: 'SrcPort', 16: 'DstPort', 32: 'SeqNo', 64: 'AckNo', 96: 'DataOffset', 107: 'Flag_NS', 108: 'Flag_CWR', 109: 'Flag_ECE', 110: 'Flag_URG', 111: 'Flag_ACK', 112: 'Flag_PSH', 113: 'Flag_RST', 114: 'Flag_SYN', 115: 'Flag_FIN' }
     }

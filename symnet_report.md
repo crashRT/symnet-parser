@@ -179,12 +179,12 @@ OK
 - `AssignRaw(EthDst,Symbol(d),GenericNumeric)`
 - `AllocateRaw(EtherType,16)`
 - `AssignRaw(EtherType,[Const(00:00:00:00:81:00 (MAC))],GenericNumeric)`
-- `AllocateRaw(L2+112,3)`
-- `AssignRaw(L2+112,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+115,1)`
-- `AssignRaw(L2+115,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+116,12)`
-- `AssignRaw(L2+116,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
+- `AllocateRaw(VLAN_PCP,3)`
+- `AssignRaw(VLAN_PCP,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_DEI,1)`
+- `AssignRaw(VLAN_DEI,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_VID,12)`
+- `AssignRaw(VLAN_VID,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
 - `DeallocateNamedSymbol(s)`
 - `DeallocateNamedSymbol(d)`
 - `Forward(ap-vlanencap-0-out)`
@@ -202,7 +202,7 @@ OK
 ---
 
 - `NoOp`
-- `ConstrainRaw(L2+116,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
+- `ConstrainRaw(VLAN_VID,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
 - `Forward(poesw-tag-out-0)`
 
 ---
@@ -216,9 +216,9 @@ OK
 - `DeallocateRaw(EthSrc,48)`
 - `DeallocateRaw(EthDst,48)`
 - `DeallocateRaw(EtherType,16)`
-- `DeallocateRaw(L2+112,3)`
-- `DeallocateRaw(L2+115,1)`
-- `DeallocateRaw(L2+116,12)`
+- `DeallocateRaw(VLAN_PCP,3)`
+- `DeallocateRaw(VLAN_DEI,1)`
+- `DeallocateRaw(VLAN_VID,12)`
 - `CreateTag(L2,L2+32)`
 - `AllocateRaw(EthSrc,48)`
 - `AssignRaw(EthSrc,Symbol(s),GenericNumeric)`
@@ -250,12 +250,12 @@ OK
 - `AssignRaw(EthDst,Symbol(d),GenericNumeric)`
 - `AllocateRaw(EtherType,16)`
 - `AssignRaw(EtherType,[Const(00:00:00:00:81:00 (MAC))],GenericNumeric)`
-- `AllocateRaw(L2+112,3)`
-- `AssignRaw(L2+112,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+115,1)`
-- `AssignRaw(L2+115,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+116,12)`
-- `AssignRaw(L2+116,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
+- `AllocateRaw(VLAN_PCP,3)`
+- `AssignRaw(VLAN_PCP,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_DEI,1)`
+- `AssignRaw(VLAN_DEI,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_VID,12)`
+- `AssignRaw(VLAN_VID,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
 - `DeallocateNamedSymbol(s)`
 - `DeallocateNamedSymbol(d)`
 - `Forward(poesw-vlanencap-2-out)`
@@ -279,7 +279,7 @@ OK
 ---
 
 - `NoOp`
-- `ConstrainRaw(L2+116,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
+- `ConstrainRaw(VLAN_VID,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
 - `Forward(rtx1210-lan1_tag-out-0)`
 
 ---
@@ -293,9 +293,9 @@ OK
 - `DeallocateRaw(EthSrc,48)`
 - `DeallocateRaw(EthDst,48)`
 - `DeallocateRaw(EtherType,16)`
-- `DeallocateRaw(L2+112,3)`
-- `DeallocateRaw(L2+115,1)`
-- `DeallocateRaw(L2+116,12)`
+- `DeallocateRaw(VLAN_PCP,3)`
+- `DeallocateRaw(VLAN_DEI,1)`
+- `DeallocateRaw(VLAN_VID,12)`
 - `CreateTag(L2,L2+32)`
 - `AllocateRaw(EthSrc,48)`
 - `AssignRaw(EthSrc,Symbol(s),GenericNumeric)`
@@ -360,12 +360,12 @@ Value: [Const(00:00:5e:00:53:11 (MAC))]
 Value: [Const(IPv4 (0x0800))]
 ```
 
-#### `[IPVer_IHL]` (AbsOffset: 0)
+#### `[VLAN_PCP]` (AbsOffset: 0)
 ```
 Value: Symb(#-3844)
 ```
 
-#### `[DSCP_ECN]` (AbsOffset: 4)
+#### `[VLAN_VID]` (AbsOffset: 4)
 ```
 Value: Symb(#59516)
 ```
@@ -614,12 +614,12 @@ Value: [Const(00:00:5e:00:53:11 (MAC))]
 Value: [Const(IPv4 (0x0800))]
 ```
 
-#### `[IPVer_IHL]` (AbsOffset: 0)
+#### `[VLAN_PCP]` (AbsOffset: 0)
 ```
 Value: Symb(#-3844)
 ```
 
-#### `[DSCP_ECN]` (AbsOffset: 4)
+#### `[VLAN_VID]` (AbsOffset: 4)
 ```
 Value: Symb(#59516)
 ```
@@ -745,7 +745,7 @@ Value: Symb(#-8639)
 
 ## 🚦 1. 最終ステータス (Status)
 ```
-Memory object @ L2+116 cannot :~:(:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]))
+Memory object @ VLAN_VID cannot :~:(:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]))
 ```
 
 
@@ -859,12 +859,12 @@ Memory object @ L2+116 cannot :~:(:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00
 - `AssignRaw(EthDst,Symbol(d),GenericNumeric)`
 - `AllocateRaw(EtherType,16)`
 - `AssignRaw(EtherType,[Const(00:00:00:00:81:00 (MAC))],GenericNumeric)`
-- `AllocateRaw(L2+112,3)`
-- `AssignRaw(L2+112,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+115,1)`
-- `AssignRaw(L2+115,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+116,12)`
-- `AssignRaw(L2+116,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
+- `AllocateRaw(VLAN_PCP,3)`
+- `AssignRaw(VLAN_PCP,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_DEI,1)`
+- `AssignRaw(VLAN_DEI,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_VID,12)`
+- `AssignRaw(VLAN_VID,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
 - `DeallocateNamedSymbol(s)`
 - `DeallocateNamedSymbol(d)`
 - `Forward(ap-vlanencap-0-out)`
@@ -882,7 +882,7 @@ Memory object @ L2+116 cannot :~:(:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00
 ---
 
 - `NoOp`
-- `ConstrainRaw(L2+116,:~:(:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])),Some(~(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]))))`
+- `ConstrainRaw(VLAN_VID,:~:(:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])),Some(~(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]))))`
 
 
 ## 🧠 4. 最終的なパケットのメモリ状態 (Final Memory State)
@@ -907,17 +907,17 @@ Value: [Const(00:00:5e:00:53:11 (MAC))]
 Value: [Const(00:00:00:00:81:00 (MAC))]
 ```
 
-#### `[Unknown (Offset -32)]` (AbsOffset: -32)
+#### `[VLAN_PCP]` (AbsOffset: -32)
 ```
 Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
-#### `[Unknown (Offset -29)]` (AbsOffset: -29)
+#### `[VLAN_DEI]` (AbsOffset: -29)
 ```
 Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
-#### `[Unknown (Offset -28)]` (AbsOffset: -28)
+#### `[VLAN_VID]` (AbsOffset: -28)
 ```
 Value: [Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]
 ```
@@ -1172,12 +1172,12 @@ Memory object @ EthDst cannot :~:(:==:([Const(00:00:5e:00:53:00 (MAC))]))
 - `AssignRaw(EthDst,Symbol(d),GenericNumeric)`
 - `AllocateRaw(EtherType,16)`
 - `AssignRaw(EtherType,[Const(00:00:00:00:81:00 (MAC))],GenericNumeric)`
-- `AllocateRaw(L2+112,3)`
-- `AssignRaw(L2+112,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+115,1)`
-- `AssignRaw(L2+115,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+116,12)`
-- `AssignRaw(L2+116,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
+- `AllocateRaw(VLAN_PCP,3)`
+- `AssignRaw(VLAN_PCP,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_DEI,1)`
+- `AssignRaw(VLAN_DEI,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_VID,12)`
+- `AssignRaw(VLAN_VID,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
 - `DeallocateNamedSymbol(s)`
 - `DeallocateNamedSymbol(d)`
 - `Forward(ap-vlanencap-0-out)`
@@ -1195,7 +1195,7 @@ Memory object @ EthDst cannot :~:(:==:([Const(00:00:5e:00:53:00 (MAC))]))
 ---
 
 - `NoOp`
-- `ConstrainRaw(L2+116,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
+- `ConstrainRaw(VLAN_VID,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
 - `Forward(poesw-tag-out-0)`
 
 ---
@@ -1209,9 +1209,9 @@ Memory object @ EthDst cannot :~:(:==:([Const(00:00:5e:00:53:00 (MAC))]))
 - `DeallocateRaw(EthSrc,48)`
 - `DeallocateRaw(EthDst,48)`
 - `DeallocateRaw(EtherType,16)`
-- `DeallocateRaw(L2+112,3)`
-- `DeallocateRaw(L2+115,1)`
-- `DeallocateRaw(L2+116,12)`
+- `DeallocateRaw(VLAN_PCP,3)`
+- `DeallocateRaw(VLAN_DEI,1)`
+- `DeallocateRaw(VLAN_VID,12)`
 - `CreateTag(L2,L2+32)`
 - `AllocateRaw(EthSrc,48)`
 - `AssignRaw(EthSrc,Symbol(s),GenericNumeric)`
@@ -1249,12 +1249,12 @@ Value: [Const(00:00:5e:00:53:11 (MAC))]
 Value: [Const(IPv4 (0x0800))]
 ```
 
-#### `[IPVer_IHL]` (AbsOffset: 0)
+#### `[VLAN_PCP]` (AbsOffset: 0)
 ```
 Value: Symb(#-3844)
 ```
 
-#### `[DSCP_ECN]` (AbsOffset: 4)
+#### `[VLAN_VID]` (AbsOffset: 4)
 ```
 Value: Symb(#59516)
 ```
@@ -1380,7 +1380,7 @@ Value: Symb(#-8639)
 
 ## 🚦 1. 最終ステータス (Status)
 ```
-Memory object @ L2+116 cannot :~:(:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]))
+Memory object @ VLAN_VID cannot :~:(:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]))
 ```
 
 
@@ -1495,12 +1495,12 @@ Memory object @ L2+116 cannot :~:(:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00
 - `AssignRaw(EthDst,Symbol(d),GenericNumeric)`
 - `AllocateRaw(EtherType,16)`
 - `AssignRaw(EtherType,[Const(00:00:00:00:81:00 (MAC))],GenericNumeric)`
-- `AllocateRaw(L2+112,3)`
-- `AssignRaw(L2+112,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+115,1)`
-- `AssignRaw(L2+115,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+116,12)`
-- `AssignRaw(L2+116,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
+- `AllocateRaw(VLAN_PCP,3)`
+- `AssignRaw(VLAN_PCP,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_DEI,1)`
+- `AssignRaw(VLAN_DEI,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_VID,12)`
+- `AssignRaw(VLAN_VID,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
 - `DeallocateNamedSymbol(s)`
 - `DeallocateNamedSymbol(d)`
 - `Forward(ap-vlanencap-0-out)`
@@ -1518,7 +1518,7 @@ Memory object @ L2+116 cannot :~:(:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00
 ---
 
 - `NoOp`
-- `ConstrainRaw(L2+116,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
+- `ConstrainRaw(VLAN_VID,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
 - `Forward(poesw-tag-out-0)`
 
 ---
@@ -1532,9 +1532,9 @@ Memory object @ L2+116 cannot :~:(:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00
 - `DeallocateRaw(EthSrc,48)`
 - `DeallocateRaw(EthDst,48)`
 - `DeallocateRaw(EtherType,16)`
-- `DeallocateRaw(L2+112,3)`
-- `DeallocateRaw(L2+115,1)`
-- `DeallocateRaw(L2+116,12)`
+- `DeallocateRaw(VLAN_PCP,3)`
+- `DeallocateRaw(VLAN_DEI,1)`
+- `DeallocateRaw(VLAN_VID,12)`
 - `CreateTag(L2,L2+32)`
 - `AllocateRaw(EthSrc,48)`
 - `AssignRaw(EthSrc,Symbol(s),GenericNumeric)`
@@ -1566,12 +1566,12 @@ Memory object @ L2+116 cannot :~:(:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00
 - `AssignRaw(EthDst,Symbol(d),GenericNumeric)`
 - `AllocateRaw(EtherType,16)`
 - `AssignRaw(EtherType,[Const(00:00:00:00:81:00 (MAC))],GenericNumeric)`
-- `AllocateRaw(L2+112,3)`
-- `AssignRaw(L2+112,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+115,1)`
-- `AssignRaw(L2+115,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+116,12)`
-- `AssignRaw(L2+116,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
+- `AllocateRaw(VLAN_PCP,3)`
+- `AssignRaw(VLAN_PCP,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_DEI,1)`
+- `AssignRaw(VLAN_DEI,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_VID,12)`
+- `AssignRaw(VLAN_VID,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
 - `DeallocateNamedSymbol(s)`
 - `DeallocateNamedSymbol(d)`
 - `Forward(poesw-vlanencap-2-out)`
@@ -1595,7 +1595,7 @@ Memory object @ L2+116 cannot :~:(:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00
 ---
 
 - `NoOp`
-- `ConstrainRaw(L2+116,:~:(:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])),Some(~(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]))))`
+- `ConstrainRaw(VLAN_VID,:~:(:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])),Some(~(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]))))`
 
 
 ## 🧠 4. 最終的なパケットのメモリ状態 (Final Memory State)
@@ -1620,17 +1620,17 @@ Value: [Const(00:00:5e:00:53:11 (MAC))]
 Value: [Const(00:00:00:00:81:00 (MAC))]
 ```
 
-#### `[Unknown (Offset -32)]` (AbsOffset: -32)
+#### `[VLAN_PCP]` (AbsOffset: -32)
 ```
 Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
-#### `[Unknown (Offset -29)]` (AbsOffset: -29)
+#### `[VLAN_DEI]` (AbsOffset: -29)
 ```
 Value: [Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)]
 ```
 
-#### `[Unknown (Offset -28)]` (AbsOffset: -28)
+#### `[VLAN_VID]` (AbsOffset: -28)
 ```
 Value: [Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]
 ```
@@ -1886,12 +1886,12 @@ Memory object @ EthDst cannot :~:(:==:([Const(00:00:5e:00:53:00 (MAC))]))
 - `AssignRaw(EthDst,Symbol(d),GenericNumeric)`
 - `AllocateRaw(EtherType,16)`
 - `AssignRaw(EtherType,[Const(00:00:00:00:81:00 (MAC))],GenericNumeric)`
-- `AllocateRaw(L2+112,3)`
-- `AssignRaw(L2+112,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+115,1)`
-- `AssignRaw(L2+115,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+116,12)`
-- `AssignRaw(L2+116,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
+- `AllocateRaw(VLAN_PCP,3)`
+- `AssignRaw(VLAN_PCP,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_DEI,1)`
+- `AssignRaw(VLAN_DEI,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_VID,12)`
+- `AssignRaw(VLAN_VID,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
 - `DeallocateNamedSymbol(s)`
 - `DeallocateNamedSymbol(d)`
 - `Forward(ap-vlanencap-0-out)`
@@ -1909,7 +1909,7 @@ Memory object @ EthDst cannot :~:(:==:([Const(00:00:5e:00:53:00 (MAC))]))
 ---
 
 - `NoOp`
-- `ConstrainRaw(L2+116,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
+- `ConstrainRaw(VLAN_VID,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
 - `Forward(poesw-tag-out-0)`
 
 ---
@@ -1923,9 +1923,9 @@ Memory object @ EthDst cannot :~:(:==:([Const(00:00:5e:00:53:00 (MAC))]))
 - `DeallocateRaw(EthSrc,48)`
 - `DeallocateRaw(EthDst,48)`
 - `DeallocateRaw(EtherType,16)`
-- `DeallocateRaw(L2+112,3)`
-- `DeallocateRaw(L2+115,1)`
-- `DeallocateRaw(L2+116,12)`
+- `DeallocateRaw(VLAN_PCP,3)`
+- `DeallocateRaw(VLAN_DEI,1)`
+- `DeallocateRaw(VLAN_VID,12)`
 - `CreateTag(L2,L2+32)`
 - `AllocateRaw(EthSrc,48)`
 - `AssignRaw(EthSrc,Symbol(s),GenericNumeric)`
@@ -1957,12 +1957,12 @@ Memory object @ EthDst cannot :~:(:==:([Const(00:00:5e:00:53:00 (MAC))]))
 - `AssignRaw(EthDst,Symbol(d),GenericNumeric)`
 - `AllocateRaw(EtherType,16)`
 - `AssignRaw(EtherType,[Const(00:00:00:00:81:00 (MAC))],GenericNumeric)`
-- `AllocateRaw(L2+112,3)`
-- `AssignRaw(L2+112,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+115,1)`
-- `AssignRaw(L2+115,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+116,12)`
-- `AssignRaw(L2+116,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
+- `AllocateRaw(VLAN_PCP,3)`
+- `AssignRaw(VLAN_PCP,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_DEI,1)`
+- `AssignRaw(VLAN_DEI,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_VID,12)`
+- `AssignRaw(VLAN_VID,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
 - `DeallocateNamedSymbol(s)`
 - `DeallocateNamedSymbol(d)`
 - `Forward(poesw-vlanencap-2-out)`
@@ -1986,7 +1986,7 @@ Memory object @ EthDst cannot :~:(:==:([Const(00:00:5e:00:53:00 (MAC))]))
 ---
 
 - `NoOp`
-- `ConstrainRaw(L2+116,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
+- `ConstrainRaw(VLAN_VID,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
 - `Forward(rtx1210-lan1_tag-out-0)`
 
 ---
@@ -2000,9 +2000,9 @@ Memory object @ EthDst cannot :~:(:==:([Const(00:00:5e:00:53:00 (MAC))]))
 - `DeallocateRaw(EthSrc,48)`
 - `DeallocateRaw(EthDst,48)`
 - `DeallocateRaw(EtherType,16)`
-- `DeallocateRaw(L2+112,3)`
-- `DeallocateRaw(L2+115,1)`
-- `DeallocateRaw(L2+116,12)`
+- `DeallocateRaw(VLAN_PCP,3)`
+- `DeallocateRaw(VLAN_DEI,1)`
+- `DeallocateRaw(VLAN_VID,12)`
 - `CreateTag(L2,L2+32)`
 - `AllocateRaw(EthSrc,48)`
 - `AssignRaw(EthSrc,Symbol(s),GenericNumeric)`
@@ -2040,12 +2040,12 @@ Value: [Const(00:00:5e:00:53:11 (MAC))]
 Value: [Const(IPv4 (0x0800))]
 ```
 
-#### `[IPVer_IHL]` (AbsOffset: 0)
+#### `[VLAN_PCP]` (AbsOffset: 0)
 ```
 Value: Symb(#-3844)
 ```
 
-#### `[DSCP_ECN]` (AbsOffset: 4)
+#### `[VLAN_VID]` (AbsOffset: 4)
 ```
 Value: Symb(#59516)
 ```
@@ -2286,12 +2286,12 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.127.1 (IP))]),:<=:([Const(1
 - `AssignRaw(EthDst,Symbol(d),GenericNumeric)`
 - `AllocateRaw(EtherType,16)`
 - `AssignRaw(EtherType,[Const(00:00:00:00:81:00 (MAC))],GenericNumeric)`
-- `AllocateRaw(L2+112,3)`
-- `AssignRaw(L2+112,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+115,1)`
-- `AssignRaw(L2+115,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+116,12)`
-- `AssignRaw(L2+116,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
+- `AllocateRaw(VLAN_PCP,3)`
+- `AssignRaw(VLAN_PCP,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_DEI,1)`
+- `AssignRaw(VLAN_DEI,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_VID,12)`
+- `AssignRaw(VLAN_VID,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
 - `DeallocateNamedSymbol(s)`
 - `DeallocateNamedSymbol(d)`
 - `Forward(ap-vlanencap-0-out)`
@@ -2309,7 +2309,7 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.127.1 (IP))]),:<=:([Const(1
 ---
 
 - `NoOp`
-- `ConstrainRaw(L2+116,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
+- `ConstrainRaw(VLAN_VID,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
 - `Forward(poesw-tag-out-0)`
 
 ---
@@ -2323,9 +2323,9 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.127.1 (IP))]),:<=:([Const(1
 - `DeallocateRaw(EthSrc,48)`
 - `DeallocateRaw(EthDst,48)`
 - `DeallocateRaw(EtherType,16)`
-- `DeallocateRaw(L2+112,3)`
-- `DeallocateRaw(L2+115,1)`
-- `DeallocateRaw(L2+116,12)`
+- `DeallocateRaw(VLAN_PCP,3)`
+- `DeallocateRaw(VLAN_DEI,1)`
+- `DeallocateRaw(VLAN_VID,12)`
 - `CreateTag(L2,L2+32)`
 - `AllocateRaw(EthSrc,48)`
 - `AssignRaw(EthSrc,Symbol(s),GenericNumeric)`
@@ -2357,12 +2357,12 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.127.1 (IP))]),:<=:([Const(1
 - `AssignRaw(EthDst,Symbol(d),GenericNumeric)`
 - `AllocateRaw(EtherType,16)`
 - `AssignRaw(EtherType,[Const(00:00:00:00:81:00 (MAC))],GenericNumeric)`
-- `AllocateRaw(L2+112,3)`
-- `AssignRaw(L2+112,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+115,1)`
-- `AssignRaw(L2+115,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+116,12)`
-- `AssignRaw(L2+116,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
+- `AllocateRaw(VLAN_PCP,3)`
+- `AssignRaw(VLAN_PCP,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_DEI,1)`
+- `AssignRaw(VLAN_DEI,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_VID,12)`
+- `AssignRaw(VLAN_VID,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
 - `DeallocateNamedSymbol(s)`
 - `DeallocateNamedSymbol(d)`
 - `Forward(poesw-vlanencap-2-out)`
@@ -2386,7 +2386,7 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.127.1 (IP))]),:<=:([Const(1
 ---
 
 - `NoOp`
-- `ConstrainRaw(L2+116,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
+- `ConstrainRaw(VLAN_VID,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
 - `Forward(rtx1210-lan1_tag-out-0)`
 
 ---
@@ -2400,9 +2400,9 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.127.1 (IP))]),:<=:([Const(1
 - `DeallocateRaw(EthSrc,48)`
 - `DeallocateRaw(EthDst,48)`
 - `DeallocateRaw(EtherType,16)`
-- `DeallocateRaw(L2+112,3)`
-- `DeallocateRaw(L2+115,1)`
-- `DeallocateRaw(L2+116,12)`
+- `DeallocateRaw(VLAN_PCP,3)`
+- `DeallocateRaw(VLAN_DEI,1)`
+- `DeallocateRaw(VLAN_VID,12)`
 - `CreateTag(L2,L2+32)`
 - `AllocateRaw(EthSrc,48)`
 - `AssignRaw(EthSrc,Symbol(s),GenericNumeric)`
@@ -2448,12 +2448,12 @@ Value: [Const(00:00:5e:00:53:11 (MAC))]
 Value: [Const(IPv4 (0x0800))]
 ```
 
-#### `[IPVer_IHL]` (AbsOffset: 0)
+#### `[VLAN_PCP]` (AbsOffset: 0)
 ```
 Value: Symb(#-3844)
 ```
 
-#### `[DSCP_ECN]` (AbsOffset: 4)
+#### `[VLAN_VID]` (AbsOffset: 4)
 ```
 Value: Symb(#59516)
 ```
@@ -2694,12 +2694,12 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.127.0 (IP))]),:<=:([Const(1
 - `AssignRaw(EthDst,Symbol(d),GenericNumeric)`
 - `AllocateRaw(EtherType,16)`
 - `AssignRaw(EtherType,[Const(00:00:00:00:81:00 (MAC))],GenericNumeric)`
-- `AllocateRaw(L2+112,3)`
-- `AssignRaw(L2+112,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+115,1)`
-- `AssignRaw(L2+115,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+116,12)`
-- `AssignRaw(L2+116,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
+- `AllocateRaw(VLAN_PCP,3)`
+- `AssignRaw(VLAN_PCP,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_DEI,1)`
+- `AssignRaw(VLAN_DEI,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_VID,12)`
+- `AssignRaw(VLAN_VID,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
 - `DeallocateNamedSymbol(s)`
 - `DeallocateNamedSymbol(d)`
 - `Forward(ap-vlanencap-0-out)`
@@ -2717,7 +2717,7 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.127.0 (IP))]),:<=:([Const(1
 ---
 
 - `NoOp`
-- `ConstrainRaw(L2+116,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
+- `ConstrainRaw(VLAN_VID,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
 - `Forward(poesw-tag-out-0)`
 
 ---
@@ -2731,9 +2731,9 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.127.0 (IP))]),:<=:([Const(1
 - `DeallocateRaw(EthSrc,48)`
 - `DeallocateRaw(EthDst,48)`
 - `DeallocateRaw(EtherType,16)`
-- `DeallocateRaw(L2+112,3)`
-- `DeallocateRaw(L2+115,1)`
-- `DeallocateRaw(L2+116,12)`
+- `DeallocateRaw(VLAN_PCP,3)`
+- `DeallocateRaw(VLAN_DEI,1)`
+- `DeallocateRaw(VLAN_VID,12)`
 - `CreateTag(L2,L2+32)`
 - `AllocateRaw(EthSrc,48)`
 - `AssignRaw(EthSrc,Symbol(s),GenericNumeric)`
@@ -2765,12 +2765,12 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.127.0 (IP))]),:<=:([Const(1
 - `AssignRaw(EthDst,Symbol(d),GenericNumeric)`
 - `AllocateRaw(EtherType,16)`
 - `AssignRaw(EtherType,[Const(00:00:00:00:81:00 (MAC))],GenericNumeric)`
-- `AllocateRaw(L2+112,3)`
-- `AssignRaw(L2+112,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+115,1)`
-- `AssignRaw(L2+115,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+116,12)`
-- `AssignRaw(L2+116,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
+- `AllocateRaw(VLAN_PCP,3)`
+- `AssignRaw(VLAN_PCP,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_DEI,1)`
+- `AssignRaw(VLAN_DEI,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_VID,12)`
+- `AssignRaw(VLAN_VID,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
 - `DeallocateNamedSymbol(s)`
 - `DeallocateNamedSymbol(d)`
 - `Forward(poesw-vlanencap-2-out)`
@@ -2794,7 +2794,7 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.127.0 (IP))]),:<=:([Const(1
 ---
 
 - `NoOp`
-- `ConstrainRaw(L2+116,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
+- `ConstrainRaw(VLAN_VID,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
 - `Forward(rtx1210-lan1_tag-out-0)`
 
 ---
@@ -2808,9 +2808,9 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.127.0 (IP))]),:<=:([Const(1
 - `DeallocateRaw(EthSrc,48)`
 - `DeallocateRaw(EthDst,48)`
 - `DeallocateRaw(EtherType,16)`
-- `DeallocateRaw(L2+112,3)`
-- `DeallocateRaw(L2+115,1)`
-- `DeallocateRaw(L2+116,12)`
+- `DeallocateRaw(VLAN_PCP,3)`
+- `DeallocateRaw(VLAN_DEI,1)`
+- `DeallocateRaw(VLAN_VID,12)`
 - `CreateTag(L2,L2+32)`
 - `AllocateRaw(EthSrc,48)`
 - `AssignRaw(EthSrc,Symbol(s),GenericNumeric)`
@@ -2857,12 +2857,12 @@ Value: [Const(00:00:5e:00:53:11 (MAC))]
 Value: [Const(IPv4 (0x0800))]
 ```
 
-#### `[IPVer_IHL]` (AbsOffset: 0)
+#### `[VLAN_PCP]` (AbsOffset: 0)
 ```
 Value: Symb(#-3844)
 ```
 
-#### `[DSCP_ECN]` (AbsOffset: 4)
+#### `[VLAN_VID]` (AbsOffset: 4)
 ```
 Value: Symb(#59516)
 ```
@@ -3104,12 +3104,12 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.180.1 (IP))]),:<=:([Const(1
 - `AssignRaw(EthDst,Symbol(d),GenericNumeric)`
 - `AllocateRaw(EtherType,16)`
 - `AssignRaw(EtherType,[Const(00:00:00:00:81:00 (MAC))],GenericNumeric)`
-- `AllocateRaw(L2+112,3)`
-- `AssignRaw(L2+112,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+115,1)`
-- `AssignRaw(L2+115,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+116,12)`
-- `AssignRaw(L2+116,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
+- `AllocateRaw(VLAN_PCP,3)`
+- `AssignRaw(VLAN_PCP,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_DEI,1)`
+- `AssignRaw(VLAN_DEI,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_VID,12)`
+- `AssignRaw(VLAN_VID,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
 - `DeallocateNamedSymbol(s)`
 - `DeallocateNamedSymbol(d)`
 - `Forward(ap-vlanencap-0-out)`
@@ -3127,7 +3127,7 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.180.1 (IP))]),:<=:([Const(1
 ---
 
 - `NoOp`
-- `ConstrainRaw(L2+116,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
+- `ConstrainRaw(VLAN_VID,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
 - `Forward(poesw-tag-out-0)`
 
 ---
@@ -3141,9 +3141,9 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.180.1 (IP))]),:<=:([Const(1
 - `DeallocateRaw(EthSrc,48)`
 - `DeallocateRaw(EthDst,48)`
 - `DeallocateRaw(EtherType,16)`
-- `DeallocateRaw(L2+112,3)`
-- `DeallocateRaw(L2+115,1)`
-- `DeallocateRaw(L2+116,12)`
+- `DeallocateRaw(VLAN_PCP,3)`
+- `DeallocateRaw(VLAN_DEI,1)`
+- `DeallocateRaw(VLAN_VID,12)`
 - `CreateTag(L2,L2+32)`
 - `AllocateRaw(EthSrc,48)`
 - `AssignRaw(EthSrc,Symbol(s),GenericNumeric)`
@@ -3175,12 +3175,12 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.180.1 (IP))]),:<=:([Const(1
 - `AssignRaw(EthDst,Symbol(d),GenericNumeric)`
 - `AllocateRaw(EtherType,16)`
 - `AssignRaw(EtherType,[Const(00:00:00:00:81:00 (MAC))],GenericNumeric)`
-- `AllocateRaw(L2+112,3)`
-- `AssignRaw(L2+112,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+115,1)`
-- `AssignRaw(L2+115,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+116,12)`
-- `AssignRaw(L2+116,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
+- `AllocateRaw(VLAN_PCP,3)`
+- `AssignRaw(VLAN_PCP,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_DEI,1)`
+- `AssignRaw(VLAN_DEI,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_VID,12)`
+- `AssignRaw(VLAN_VID,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
 - `DeallocateNamedSymbol(s)`
 - `DeallocateNamedSymbol(d)`
 - `Forward(poesw-vlanencap-2-out)`
@@ -3204,7 +3204,7 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.180.1 (IP))]),:<=:([Const(1
 ---
 
 - `NoOp`
-- `ConstrainRaw(L2+116,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
+- `ConstrainRaw(VLAN_VID,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
 - `Forward(rtx1210-lan1_tag-out-0)`
 
 ---
@@ -3218,9 +3218,9 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.180.1 (IP))]),:<=:([Const(1
 - `DeallocateRaw(EthSrc,48)`
 - `DeallocateRaw(EthDst,48)`
 - `DeallocateRaw(EtherType,16)`
-- `DeallocateRaw(L2+112,3)`
-- `DeallocateRaw(L2+115,1)`
-- `DeallocateRaw(L2+116,12)`
+- `DeallocateRaw(VLAN_PCP,3)`
+- `DeallocateRaw(VLAN_DEI,1)`
+- `DeallocateRaw(VLAN_VID,12)`
 - `CreateTag(L2,L2+32)`
 - `AllocateRaw(EthSrc,48)`
 - `AssignRaw(EthSrc,Symbol(s),GenericNumeric)`
@@ -3268,12 +3268,12 @@ Value: [Const(00:00:5e:00:53:11 (MAC))]
 Value: [Const(IPv4 (0x0800))]
 ```
 
-#### `[IPVer_IHL]` (AbsOffset: 0)
+#### `[VLAN_PCP]` (AbsOffset: 0)
 ```
 Value: Symb(#-3844)
 ```
 
-#### `[DSCP_ECN]` (AbsOffset: 4)
+#### `[VLAN_VID]` (AbsOffset: 4)
 ```
 Value: Symb(#59516)
 ```
@@ -3516,12 +3516,12 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.180.0 (IP))]),:<=:([Const(1
 - `AssignRaw(EthDst,Symbol(d),GenericNumeric)`
 - `AllocateRaw(EtherType,16)`
 - `AssignRaw(EtherType,[Const(00:00:00:00:81:00 (MAC))],GenericNumeric)`
-- `AllocateRaw(L2+112,3)`
-- `AssignRaw(L2+112,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+115,1)`
-- `AssignRaw(L2+115,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+116,12)`
-- `AssignRaw(L2+116,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
+- `AllocateRaw(VLAN_PCP,3)`
+- `AssignRaw(VLAN_PCP,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_DEI,1)`
+- `AssignRaw(VLAN_DEI,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_VID,12)`
+- `AssignRaw(VLAN_VID,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
 - `DeallocateNamedSymbol(s)`
 - `DeallocateNamedSymbol(d)`
 - `Forward(ap-vlanencap-0-out)`
@@ -3539,7 +3539,7 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.180.0 (IP))]),:<=:([Const(1
 ---
 
 - `NoOp`
-- `ConstrainRaw(L2+116,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
+- `ConstrainRaw(VLAN_VID,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
 - `Forward(poesw-tag-out-0)`
 
 ---
@@ -3553,9 +3553,9 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.180.0 (IP))]),:<=:([Const(1
 - `DeallocateRaw(EthSrc,48)`
 - `DeallocateRaw(EthDst,48)`
 - `DeallocateRaw(EtherType,16)`
-- `DeallocateRaw(L2+112,3)`
-- `DeallocateRaw(L2+115,1)`
-- `DeallocateRaw(L2+116,12)`
+- `DeallocateRaw(VLAN_PCP,3)`
+- `DeallocateRaw(VLAN_DEI,1)`
+- `DeallocateRaw(VLAN_VID,12)`
 - `CreateTag(L2,L2+32)`
 - `AllocateRaw(EthSrc,48)`
 - `AssignRaw(EthSrc,Symbol(s),GenericNumeric)`
@@ -3587,12 +3587,12 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.180.0 (IP))]),:<=:([Const(1
 - `AssignRaw(EthDst,Symbol(d),GenericNumeric)`
 - `AllocateRaw(EtherType,16)`
 - `AssignRaw(EtherType,[Const(00:00:00:00:81:00 (MAC))],GenericNumeric)`
-- `AllocateRaw(L2+112,3)`
-- `AssignRaw(L2+112,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+115,1)`
-- `AssignRaw(L2+115,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+116,12)`
-- `AssignRaw(L2+116,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
+- `AllocateRaw(VLAN_PCP,3)`
+- `AssignRaw(VLAN_PCP,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_DEI,1)`
+- `AssignRaw(VLAN_DEI,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_VID,12)`
+- `AssignRaw(VLAN_VID,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
 - `DeallocateNamedSymbol(s)`
 - `DeallocateNamedSymbol(d)`
 - `Forward(poesw-vlanencap-2-out)`
@@ -3616,7 +3616,7 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.180.0 (IP))]),:<=:([Const(1
 ---
 
 - `NoOp`
-- `ConstrainRaw(L2+116,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
+- `ConstrainRaw(VLAN_VID,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
 - `Forward(rtx1210-lan1_tag-out-0)`
 
 ---
@@ -3630,9 +3630,9 @@ Memory object @ IPDst cannot :&:(:>=:([Const(192.168.180.0 (IP))]),:<=:([Const(1
 - `DeallocateRaw(EthSrc,48)`
 - `DeallocateRaw(EthDst,48)`
 - `DeallocateRaw(EtherType,16)`
-- `DeallocateRaw(L2+112,3)`
-- `DeallocateRaw(L2+115,1)`
-- `DeallocateRaw(L2+116,12)`
+- `DeallocateRaw(VLAN_PCP,3)`
+- `DeallocateRaw(VLAN_DEI,1)`
+- `DeallocateRaw(VLAN_VID,12)`
 - `CreateTag(L2,L2+32)`
 - `AllocateRaw(EthSrc,48)`
 - `AssignRaw(EthSrc,Symbol(s),GenericNumeric)`
@@ -3681,12 +3681,12 @@ Value: [Const(00:00:5e:00:53:11 (MAC))]
 Value: [Const(IPv4 (0x0800))]
 ```
 
-#### `[IPVer_IHL]` (AbsOffset: 0)
+#### `[VLAN_PCP]` (AbsOffset: 0)
 ```
 Value: Symb(#-3844)
 ```
 
-#### `[DSCP_ECN]` (AbsOffset: 4)
+#### `[VLAN_VID]` (AbsOffset: 4)
 ```
 Value: Symb(#59516)
 ```
@@ -3930,12 +3930,12 @@ Symbol COLOR cannot :==:([Const(IP: 0.0.0.3 / MAC: 00:00:00:00:00:03 / Val: 3)])
 - `AssignRaw(EthDst,Symbol(d),GenericNumeric)`
 - `AllocateRaw(EtherType,16)`
 - `AssignRaw(EtherType,[Const(00:00:00:00:81:00 (MAC))],GenericNumeric)`
-- `AllocateRaw(L2+112,3)`
-- `AssignRaw(L2+112,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+115,1)`
-- `AssignRaw(L2+115,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+116,12)`
-- `AssignRaw(L2+116,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
+- `AllocateRaw(VLAN_PCP,3)`
+- `AssignRaw(VLAN_PCP,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_DEI,1)`
+- `AssignRaw(VLAN_DEI,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_VID,12)`
+- `AssignRaw(VLAN_VID,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
 - `DeallocateNamedSymbol(s)`
 - `DeallocateNamedSymbol(d)`
 - `Forward(ap-vlanencap-0-out)`
@@ -3953,7 +3953,7 @@ Symbol COLOR cannot :==:([Const(IP: 0.0.0.3 / MAC: 00:00:00:00:00:03 / Val: 3)])
 ---
 
 - `NoOp`
-- `ConstrainRaw(L2+116,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
+- `ConstrainRaw(VLAN_VID,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
 - `Forward(poesw-tag-out-0)`
 
 ---
@@ -3967,9 +3967,9 @@ Symbol COLOR cannot :==:([Const(IP: 0.0.0.3 / MAC: 00:00:00:00:00:03 / Val: 3)])
 - `DeallocateRaw(EthSrc,48)`
 - `DeallocateRaw(EthDst,48)`
 - `DeallocateRaw(EtherType,16)`
-- `DeallocateRaw(L2+112,3)`
-- `DeallocateRaw(L2+115,1)`
-- `DeallocateRaw(L2+116,12)`
+- `DeallocateRaw(VLAN_PCP,3)`
+- `DeallocateRaw(VLAN_DEI,1)`
+- `DeallocateRaw(VLAN_VID,12)`
 - `CreateTag(L2,L2+32)`
 - `AllocateRaw(EthSrc,48)`
 - `AssignRaw(EthSrc,Symbol(s),GenericNumeric)`
@@ -4001,12 +4001,12 @@ Symbol COLOR cannot :==:([Const(IP: 0.0.0.3 / MAC: 00:00:00:00:00:03 / Val: 3)])
 - `AssignRaw(EthDst,Symbol(d),GenericNumeric)`
 - `AllocateRaw(EtherType,16)`
 - `AssignRaw(EtherType,[Const(00:00:00:00:81:00 (MAC))],GenericNumeric)`
-- `AllocateRaw(L2+112,3)`
-- `AssignRaw(L2+112,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+115,1)`
-- `AssignRaw(L2+115,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
-- `AllocateRaw(L2+116,12)`
-- `AssignRaw(L2+116,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
+- `AllocateRaw(VLAN_PCP,3)`
+- `AssignRaw(VLAN_PCP,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_DEI,1)`
+- `AssignRaw(VLAN_DEI,[Const(IP: 0.0.0.0 / MAC: 00:00:00:00:00:00 / Val: 0)],GenericNumeric)`
+- `AllocateRaw(VLAN_VID,12)`
+- `AssignRaw(VLAN_VID,[Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)],GenericNumeric)`
 - `DeallocateNamedSymbol(s)`
 - `DeallocateNamedSymbol(d)`
 - `Forward(poesw-vlanencap-2-out)`
@@ -4030,7 +4030,7 @@ Symbol COLOR cannot :==:([Const(IP: 0.0.0.3 / MAC: 00:00:00:00:00:03 / Val: 3)])
 ---
 
 - `NoOp`
-- `ConstrainRaw(L2+116,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
+- `ConstrainRaw(VLAN_VID,:==:([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)]),Some(==([Const(IP: 0.0.0.10 / MAC: 00:00:00:00:00:0a / Val: 10)])))`
 - `Forward(rtx1210-lan1_tag-out-0)`
 
 ---
@@ -4044,9 +4044,9 @@ Symbol COLOR cannot :==:([Const(IP: 0.0.0.3 / MAC: 00:00:00:00:00:03 / Val: 3)])
 - `DeallocateRaw(EthSrc,48)`
 - `DeallocateRaw(EthDst,48)`
 - `DeallocateRaw(EtherType,16)`
-- `DeallocateRaw(L2+112,3)`
-- `DeallocateRaw(L2+115,1)`
-- `DeallocateRaw(L2+116,12)`
+- `DeallocateRaw(VLAN_PCP,3)`
+- `DeallocateRaw(VLAN_DEI,1)`
+- `DeallocateRaw(VLAN_VID,12)`
 - `CreateTag(L2,L2+32)`
 - `AllocateRaw(EthSrc,48)`
 - `AssignRaw(EthSrc,Symbol(s),GenericNumeric)`
@@ -4101,12 +4101,12 @@ Value: [Const(00:00:5e:00:53:11 (MAC))]
 Value: [Const(IPv4 (0x0800))]
 ```
 
-#### `[IPVer_IHL]` (AbsOffset: 0)
+#### `[VLAN_PCP]` (AbsOffset: 0)
 ```
 Value: Symb(#-3844)
 ```
 
-#### `[DSCP_ECN]` (AbsOffset: 4)
+#### `[VLAN_VID]` (AbsOffset: 4)
 ```
 Value: Symb(#59516)
 ```
