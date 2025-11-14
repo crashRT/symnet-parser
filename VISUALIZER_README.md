@@ -1,21 +1,23 @@
 # Click Configuration Visualizer
 
-SymNetのClick設定ファイルを解析して、モジュール間の接続を視覚的に表示するツールです。
+SymNet の Click 設定ファイルを解析して、モジュール間の接続を視覚的に表示するツールです。
 
 ## 機能
 
-- Click設定ファイル（.click）を解析
+- Click 設定ファイル（.click）を解析
 - モジュール間の接続関係をグラフとして可視化
 - モジュールタイプに応じた色分け
-- PNG/SVG/PDF形式での出力
+- PNG/SVG/PDF 形式での出力
 
 ## 必要な環境
 
 ### Python
+
 - Python 3.6 以上
 - 標準ライブラリのみ使用（追加インストール不要）
 
 ### Graphviz（画像生成用）
+
 ```bash
 # Ubuntu/Debian
 sudo apt install graphviz
@@ -24,7 +26,7 @@ sudo apt install graphviz
 brew install graphviz
 ```
 
-**注意**: Graphvizがインストールされていない場合でも、DOT形式のファイルは生成されます。
+**注意**: Graphviz がインストールされていない場合でも、DOT 形式のファイルは生成されます。
 
 ## 使い方
 
@@ -59,29 +61,29 @@ python3 visualize_click.py rtx1210.click router_diagram.dot
 
 各モジュールタイプは以下のように色分けされます：
 
-| モジュールタイプ | 色 | 説明 |
-|-----------------|-----|------|
-| FromDevice | 水色 | 入力デバイス |
-| ToDevice | ピンク | 出力デバイス |
-| IPClassifier | オレンジ | パケット分類器 |
-| LinearIPLookup | 緑 | ルーティングテーブル |
-| EtherEncap/Decap | 青/紫 | イーサネットカプセル化 |
-| VLANEncap/Decap | ピンク紫/青紫 | VLANカプセル化 |
-| Discard/Null | グレー | 破棄 |
-| Paint | 黄色 | パケットマーキング |
+| モジュールタイプ | 色            | 説明                   |
+| ---------------- | ------------- | ---------------------- |
+| FromDevice       | 水色          | 入力デバイス           |
+| ToDevice         | ピンク        | 出力デバイス           |
+| IPClassifier     | オレンジ      | パケット分類器         |
+| LinearIPLookup   | 緑            | ルーティングテーブル   |
+| EtherEncap/Decap | 青/紫         | イーサネットカプセル化 |
+| VLANEncap/Decap  | ピンク紫/青紫 | VLAN カプセル化        |
+| Discard/Null     | グレー        | 破棄                   |
+| Paint            | 黄色          | パケットマーキング     |
 
 ### グラフの読み方
 
-- **ボックス**: 各Clickモジュール
+- **ボックス**: 各 Click モジュール
 - **矢印**: モジュール間の接続
 - **[番号]**: 出力ポート番号（複数出力がある場合）
 
 ### サンプル出力
 
-rtx1210.clickの場合：
+rtx1210.click の場合：
 
 ```
-lan1_i (FromDevice) 
+lan1_i (FromDevice)
   ↓
 lan1_tag (IPClassifier)
   ├─[0]→ VLANDecap → vlan10
@@ -99,9 +101,9 @@ routing (LinearIPLookup)
   └─[3]→ lan3_o
 ```
 
-## Click設定ファイルの形式
+## Click 設定ファイルの形式
 
-このツールは以下の形式のClick設定を解析します：
+このツールは以下の形式の Click 設定を解析します：
 
 ```click
 // モジュール定義
@@ -139,26 +141,27 @@ routing[3] -> lan3_o
 
 ### ⚠️ 制限事項
 
-- 複雑なClick記法（条件分岐など）は未対応
+- 複雑な Click 記法（条件分岐など）は未対応
 - インライン要素は別モジュールとして扱われます
-- 入力ポート番号は常に0として扱われます
+- 入力ポート番号は常に 0 として扱われます
 
 ## トラブルシューティング
 
-### Graphvizがインストールされていない
+### Graphviz がインストールされていない
 
 ```
 ⚠️  Graphvizがインストールされていません。
    DOTファイルのみ生成されました: rtx1210.dot
 ```
 
-→ Graphvizをインストールするか、DOTファイルをオンラインビューアで表示できます：
+→ Graphviz をインストールするか、DOT ファイルをオンラインビューアで表示できます：
+
 - https://dreampuf.github.io/GraphvizOnline/
 - https://edotor.net/
 
 ### モジュールが表示されない
 
-→ Click設定ファイルの形式を確認してください。`name :: Type(config)` の形式である必要があります。
+→ Click 設定ファイルの形式を確認してください。`name :: Type(config)` の形式である必要があります。
 
 ### 接続が表示されない
 
@@ -179,7 +182,7 @@ MODULE_COLORS = {
 
 ### レイアウト方向を変更
 
-DOTファイルの`rankdir`を編集：
+DOT ファイルの`rankdir`を編集：
 
 ```python
 'rankdir=LR;'  # 左から右（デフォルト）
@@ -195,7 +198,7 @@ DOTファイルの`rankdir`を編集：
 ## 更新履歴
 
 - **2025-11-14**: 初版作成
-  - Click設定ファイルの解析
-  - Graphvizによる可視化
+  - Click 設定ファイルの解析
+  - Graphviz による可視化
   - モジュールタイプ別の色分け
-  - PNG/SVG/PDF/DOT形式の出力
+  - PNG/SVG/PDF/DOT 形式の出力

@@ -170,6 +170,7 @@ class ClickVisualizer:
     
     def __init__(self, parser: ClickParser):
         self.parser = parser
+        self._discard_counter = 0  # Discardノードに一意なIDを付与
         
     def _escape_label(self, text: str) -> str:
         """Graphviz用にラベルをエスケープ"""
@@ -207,8 +208,15 @@ class ClickVisualizer:
             ''
         ]
         
+        # Discardへの接続を追跡するマップ（src_module -> 一意なdiscard_id）
+        discard_mapping = {}
+        
         # モジュールノードを追加
         for name, module in sorted(self.parser.modules.items()):
+            # Discardモジュールは接続元ごとに別々のノードを作成するのでスキップ
+            if module.module_type in ['Discard', 'Null']:
+                continue
+                
             color = self._get_module_color(module.module_type)
             label = self._create_module_label(module)
             
@@ -222,7 +230,37 @@ class ClickVisualizer:
         
         # 接続エッジを追加
         for src_module, src_port, tgt_module, tgt_port in self.parser.connections:
-            # ポート番号をラベルとして表示
+            # 接続先がDiscardまたはNullの場合、専用のノードを作成
+            # モジュール名で判定（module_typeが設定されていない場合もあるため）
+            is_discard_or_null = False
+            target_type = None
+            
+            if tgt_module in self.parser.modules:
+                target_type = self.parser.modules[tgt_module].module_type
+                is_discard_or_null = target_type in ['Discard', 'Null']
+            elif tgt_module in ['Discard', 'Null']:
+                # モジュールとして定義されていないが、名前から判定
+                is_discard_or_null = True
+                target_type = tgt_module
+            
+            if is_discard_or_null:
+                # 接続元ごとに一意なDiscard/Nullノードを作成
+                self._discard_counter += 1
+                unique_discard = f"{tgt_module}_{self._discard_counter}"
+                
+                # Discard/Nullノードを追加
+                color = self._get_module_color(target_type)
+                lines.append(f'  "{unique_discard}" [label="[{target_type}]", fillcolor="{color}", shape=box];')
+                
+                # エッジを追加（ポート番号付き）
+                if src_port > 0:
+                    label = f"[{src_port}]"
+                    lines.append(f'  "{src_module}" -> "{unique_discard}" [label="{label}"];')
+                else:
+                    lines.append(f'  "{src_module}" -> "{unique_discard}";')
+                continue
+            
+            # 通常の接続
             if src_port > 0:
                 label = f"[{src_port}]"
                 lines.append(f'  "{src_module}" -> "{tgt_module}" [label="{label}"];')
