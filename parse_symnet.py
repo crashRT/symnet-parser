@@ -221,6 +221,12 @@ class SymNetParser:
             port_map[int(idx_str)] = port_name
             path_ports.append(port_name)
         
+        # 開始ホストを表示
+        if path_ports:
+            first_port = path_ports[0]
+            first_node, _ = self._parse_port_name(first_port)
+            md_lines.append(f"**開始ホスト:** `{first_node}`\n")
+        
         # ノードが変わったら改行を入れる
         path_lines = []
         current_line = []
@@ -399,13 +405,18 @@ if __name__ == "__main__":
                             pass
                 
                 if data_item and 'port_trace' in data_item:
-                    # 最後のポートを取得
+                    # 最初と最後のポートを取得
                     port_trace = data_item['port_trace']
                     if port_trace:
+                        # 開始ホスト
+                        first_port_item = port_trace[0]
+                        _, first_port_name = list(first_port_item.items())[0]
+                        # 最終到達
                         last_port_item = port_trace[-1]
                         _, last_port_name = list(last_port_item.items())[0]
                         # ダミーパーサーを作成してポート名とIPDst制約を解析
                         dummy_parser = SymNetParser(data_item)
+                        first_node, _ = dummy_parser._parse_port_name(first_port_name)
                         node, module = dummy_parser._parse_port_name(last_port_name)
                         
                         # IPDstの制約を探す
@@ -428,6 +439,7 @@ if __name__ == "__main__":
                         
                         summary_lines.append(f"### OK {ok_index} → [詳細レポートへ](#{anchor_id})")
                         summary_lines.append("```")
+                        summary_lines.append(f"開始ホスト: {first_node}")
                         summary_lines.append(f"最終到達: {node} / {module}")
                         if ipdst_constraints:
                             summary_lines.append(f"\n宛先IP制約:")
