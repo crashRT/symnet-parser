@@ -361,6 +361,9 @@ if __name__ == "__main__":
         print("エラー: 有効なレポートが生成されませんでした。")
         exit()
 
+    # レポート総数
+    total = len(all_markdown_reports)
+
     # サマリーセクションを作成
     summary_lines = []
     summary_lines.append("# 🔍 SymNet 解析サマリー\n")
@@ -417,7 +420,13 @@ if __name__ == "__main__":
                                     formatted = dummy_parser._format_constraint(c, 'IPDst')
                                     ipdst_constraints.append(formatted)
                         
-                        summary_lines.append(f"### OK {ok_index}")
+                        # レポート番号を計算（全体の中での位置）
+                        report_num = idx
+                        
+                        # アンカーID生成（見出しと同じ形式）
+                        anchor_id = f"report-{report_num}"
+                        
+                        summary_lines.append(f"### OK {ok_index} → [詳細レポートへ](#{anchor_id})")
                         summary_lines.append("```")
                         summary_lines.append(f"最終到達: {node} / {module}")
                         if ipdst_constraints:
@@ -445,11 +454,12 @@ if __name__ == "__main__":
     summary = "\n".join(summary_lines)
 
     # レポート番号を付与
-    total = len(all_markdown_reports)
     formatted_reports = []
     for i in range(total):
         markdown_output, status_label = all_markdown_reports[i]
-        report_title = f"# SymNet 解析レポート ({i + 1} / {total}) {status_label}"
+        # アンカーIDを追加
+        anchor_id = f"report-{i + 1}"
+        report_title = f"# <a id=\"{anchor_id}\"></a>SymNet 解析レポート ({i + 1} / {total}) {status_label}"
         markdown_output = markdown_output.replace(
             "# SymNet 解析レポート", 
             report_title
