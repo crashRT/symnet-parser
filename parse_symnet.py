@@ -368,6 +368,66 @@ if __name__ == "__main__":
     summary_lines.append(f"- ✅ **OK**: {ok_count} 件")
     summary_lines.append(f"- ❌ **FAIL**: {fail_count} 件\n")
     
+    # OKの場合は最終到達モジュールを表示
+    if ok_count > 0:
+        summary_lines.append("## ✅ OKの最終到達モジュールと宛先IP制約\n")
+        ok_index = 1
+        for idx, (markdown_output, status_label) in enumerate(all_markdown_reports, 1):
+            if status_label == '✅ OK':
+                # 元のデータからport_traceを取得
+                # データリストから該当のアイテムを探す
+                data_item = None
+                current_ok = 0
+                for input_json_file, label in input_json_files:
+                    if label == '✅ OK':
+                        try:
+                            with open(input_json_file, 'r') as f:
+                                data_list = json.load(f)
+                                if not isinstance(data_list, list):
+                                    data_list = [data_list]
+                                for item in data_list:
+                                    current_ok += 1
+                                    if current_ok == ok_index:
+                                        data_item = item
+                                        break
+                                if data_item:
+                                    break
+                        except:
+                            pass
+                
+                if data_item and 'port_trace' in data_item:
+                    # 最後のポートを取得
+                    port_trace = data_item['port_trace']
+                    if port_trace:
+                        last_port_item = port_trace[-1]
+                        _, last_port_name = list(last_port_item.items())[0]
+                        # ダミーパーサーを作成してポート名とIPDst制約を解析
+                        dummy_parser = SymNetParser(data_item)
+                        node, module = dummy_parser._parse_port_name(last_port_name)
+                        
+                        # IPDstの制約を探す
+                        ipdst_constraints = []
+                        for field_item in data_item.get('memory', {}).get('header_fields', []):
+                            offset_str, field_data = list(field_item.items())[0]
+                            offset = int(offset_str)
+                            # IPDstのオフセットを探す (L3+128)
+                            if offset == dummy_parser.tags.get('L3', 0) + 128:
+                                constraints = field_data.get('constraints', [])
+                                for c in constraints:
+                                    formatted = dummy_parser._format_constraint(c, 'IPDst')
+                                    ipdst_constraints.append(formatted)
+                        
+                        summary_lines.append(f"### OK {ok_index}")
+                        summary_lines.append("```")
+                        summary_lines.append(f"最終到達: {node} / {module}")
+                        if ipdst_constraints:
+                            summary_lines.append(f"\n宛先IP制約:")
+                            for constraint in ipdst_constraints:
+                                summary_lines.append(f"  - {constraint}")
+                        summary_lines.append("```")
+                        summary_lines.append("")
+                ok_index += 1
+    
     if fail_count > 0:
         summary_lines.append("## ❌ FAILの詳細\n")
         for i, status in enumerate(fail_statuses, 1):
