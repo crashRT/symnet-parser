@@ -34,12 +34,31 @@ def format_constant(val_str: str, context_field_name: str | None = None) -> str:
     if val == 34525: return "VLAN (0x8100)"
 
     if context_field_name:
-        if context_field_name.startswith("IP"):
+        # IPProtoは特別扱い（プロトコル番号）
+        if context_field_name == "IPProto":
+            # よく使われるプロトコル番号
+            proto_names = {
+                1: "ICMP",
+                6: "TCP",
+                17: "UDP",
+                47: "GRE",
+                50: "ESP",
+                51: "AH",
+                58: "ICMPv6",
+                89: "OSPF"
+            }
+            if val in proto_names:
+                return f"{val} ({proto_names[val]})"
+            return f"{val} (Protocol)"
+        elif context_field_name in ["IPSrc", "IPDst"]:
+            # IPアドレスフィールドのみIP変換
             if (ip_val := int_to_ip(val)):
                 return f"{ip_val} (IP)"
             else:
-                # IPフィールドだが範囲外の値
                 return f"Val: {val} (0x{val:x})"
+        elif context_field_name.startswith("IP"):
+            # その他のIPヘッダーフィールド（TTL、Checksumなど）は数値のまま
+            return f"{val}"
         elif context_field_name.startswith("Eth"):
             if (mac_val := int_to_mac(val)):
                 return f"{mac_val} (MAC)"
